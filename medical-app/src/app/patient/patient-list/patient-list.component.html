@@ -11,7 +11,7 @@
 
             </div>
             <div class="col-md-2">
-
+              <button type="button" class="btn btn-primary" (click)="redirectNewPatientPage()">Add Patient</button>
             </div>
           </div>
 
@@ -35,6 +35,8 @@
             <td>{{patient.name}}</td>
             <td>{{patient.medicalNote}}</td>
             <td>
+              <button type="button" class="btn btn-success" (click)="editPatientPage(patient)">Edit</button>
+              <button type="button" class="btn btn-danger" (click)="deletePatient(patient)">Delete</button>
             </td>
           </tr>
 

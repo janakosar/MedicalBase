@@ -21,19 +21,27 @@ export class PatientService {
   }
 
   findById(id: number): Observable<Patient> {
-    return null;
+    return this.http.get(this.apiUrl + '/' + id)
+      .map((res:Response) => res.json())
+      .catch((error:any) => Observable.throw(error.json().error || 'Error'));
   }
 
   savePatient(patient: Patient): Observable<Patient> {
-    return null;
+    return this.http.post(this.apiUrl, patient)
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   deletePatientById(id: number): Observable<boolean> {
-    return null;
-  }
+  return this.http.delete(this.apiUrl + '/' + id)
+    .map((res:Response) => res.json())
+    .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+}
 
   updatePatient(patient: Patient): Observable<Patient> {
-    return null;
+
+    return this.http.put(this.apiUrl, patient)
+      .map((res:Response) => res.json())
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
 }

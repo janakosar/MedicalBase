@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from "../patient";
 import { PatientService } from "../patient.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient-list',
@@ -13,9 +14,10 @@ export class PatientListComponent implements OnInit {
 
   private patients: Patient[];
 
-  constructor(private patientService: PatientService) { }
+  constructor(private router: Router,
+              private patientService: PatientService) { }
 
-  ngOnInit() { //when component loading get all users and set the users[]
+  ngOnInit() {
     this.getAllPatients();
   }
 
@@ -31,5 +33,26 @@ export class PatientListComponent implements OnInit {
     );
   }
 
+  redirectNewPatientPage() {
+    this.router.navigate(['/patient/create']);
+  }
+
+  editPatientPage(patient: Patient) {
+    if (patient) {
+      this.router.navigate(['/patient/edit', patient.id]);
+    }
+  }
+
+  deletePatient(patient: Patient) {
+    if (patient) {
+      this.patientService.deletePatientById(patient.id).subscribe(
+        res => {
+          this.getAllPatients();
+          this.router.navigate(['/patients']);
+          console.log('done');
+        }
+      );
+    }
+  }
 
 }
