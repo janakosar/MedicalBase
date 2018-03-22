@@ -52,8 +52,9 @@ public class PatientsController {
     @RequestMapping(method = RequestMethod.PUT)
     public Patient updatePatient(@RequestBody Patient patient) {
         Patient modifiedUser = this.patients.stream().filter(p -> p.getId() == patient.getId()).findFirst().orElse(null);
-        modifiedUser.setName(patient.getName());
-        modifiedUser.setMedicalNote(patient.getMedicalNote());
+        modifiedUser.setFirstName(patient.getFirstName());
+        modifiedUser.setLastName(patient.getLastName());
+        modifiedUser.setComments(patient.getComments());
         return modifiedUser;
     }
 
@@ -63,7 +64,7 @@ public class PatientsController {
         if (deletePatient != null) {
             this.patients.remove(deletePatient);
             return true;
-        } else  {
+        } else {
             return false;
         }
 
@@ -73,11 +74,11 @@ public class PatientsController {
     List<Patient> buildPatients() {
         List<Patient> patients = new ArrayList<>();
 
-        Patient patient1 = buildPatient(1L, "John Doe", "John Doe's medical note");
-        Patient patient2 = buildPatient(2L, "Jon Smith", "Jon Smith's medical note");
-        Patient patient3 = buildPatient(3L, "Will Craig", "Will Craig's medical note");
-        Patient patient4 = buildPatient(4L, "Sam Lernorad", "Sam Lernorad's medical note");
-        Patient patient5 = buildPatient(5L, "Ross Doe", "Ross Doe's medical note");
+        Patient patient1 = new Patient("John Doe");
+        Patient patient2 = new Patient("Jon Smith");
+        Patient patient3 = new Patient("Will Craig");
+        Patient patient4 = new Patient("Sam Lernorad");
+        Patient patient5 = new Patient("Ross Doe");
 
         patients.add(patient1);
         patients.add(patient2);
@@ -89,11 +90,4 @@ public class PatientsController {
 
     }
 
-    Patient buildPatient(Long id, String name, String medicalNote) {
-        Patient user = new Patient();
-        user.setId(id);
-        user.setName(name);
-        user.setMedicalNote(medicalNote);
-        return user;
-    }
 }
