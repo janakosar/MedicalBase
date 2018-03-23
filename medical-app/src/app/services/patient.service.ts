@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Patient} from "./patient";
+import {Patient} from "../domain/Patient";
 import {Http, Response} from "@angular/http";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch';

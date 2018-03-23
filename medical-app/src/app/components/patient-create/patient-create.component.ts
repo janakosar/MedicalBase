@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {PatientService} from "../patient.service";
-import {Patient} from "../patient";
+import {PatientService} from "../../services/patient.service";
+import {Patient} from "../../domain/Patient";
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -43,7 +43,7 @@ export class PatientCreateComponent implements OnInit, OnDestroy {
             fistName: patient.firstName,
             lastName: patient.lastName,
           });
-        },error => {
+        }, error => {
           console.log(error);
         }
       );
@@ -61,12 +61,12 @@ export class PatientCreateComponent implements OnInit, OnDestroy {
   onSubmit() {
     if (this.patientForm.valid) {
       if (this.id) {
-        let patient: Patient = new Patient(this.id,
+        let patient: Patient = new Patient(
           this.patientForm.controls['firstName'].value,
-          this.patientForm.controls['lastName'].value);
+          this.patientForm.controls['lastName'].value,);
         this.patientService.updatePatient(patient).subscribe();
       } else {
-        let patient: Patient = new Patient(null,
+        let patient: Patient = new Patient(
           this.patientForm.controls['firstName'].value,
           this.patientForm.controls['lastName'].value);
         this.patientService.savePatient(patient).subscribe();

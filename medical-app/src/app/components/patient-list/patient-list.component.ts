@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Patient } from "../patient";
-import { PatientService } from "../patient.service";
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Patient} from "../../domain/Patient";
+import {PatientService} from "../../services/patient.service";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-patient-list',
@@ -15,7 +15,8 @@ export class PatientListComponent implements OnInit {
   private patients: Patient[];
 
   constructor(private router: Router,
-              private patientService: PatientService) { }
+              private patientService: PatientService) {
+  }
 
   ngOnInit() {
     this.getAllPatients();
@@ -29,12 +30,15 @@ export class PatientListComponent implements OnInit {
       err => {
         console.log(err);
       }
-
     );
   }
 
   redirectNewPatientPage() {
     this.router.navigate(['/patient/create']);
+  }
+
+  openPatientDetails(patient: Patient) {
+    console.log("Patient: id: " + JSON.stringify(patient))
   }
 
   editPatientPage(patient: Patient) {
