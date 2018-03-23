@@ -1,5 +1,6 @@
-package com.nandy.medicalbase;
+package com.nandy.medicalbase.repository;
 
+import com.nandy.medicalbase.domain.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;

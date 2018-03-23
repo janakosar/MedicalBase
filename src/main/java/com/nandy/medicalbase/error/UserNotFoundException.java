@@ -1,4 +1,4 @@
-package com.nandy.medicalbase;
+package com.nandy.medicalbase.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

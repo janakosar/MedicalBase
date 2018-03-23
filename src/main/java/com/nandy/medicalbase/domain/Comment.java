@@ -1,4 +1,4 @@
-package com.nandy.medicalbase;
+package com.nandy.medicalbase.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
