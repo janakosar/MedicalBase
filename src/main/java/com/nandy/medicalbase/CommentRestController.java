@@ -42,9 +42,8 @@ public class CommentRestController {
         this.validatePatient(patientId);
 
         return this.patientRepository.findById(patientId)
-                .map(account -> {
-                    Comment result = commentRepository.save(
-                            new Comment(account, input.getText(), input.getTimestamp()));
+                .map(patient -> {
+                    Comment result = commentRepository.save(new Comment(patient, input.getText()));
 
                     URI location = ServletUriComponentsBuilder
                             .fromCurrentRequest().path("/{id}")

@@ -1,11 +1,10 @@
 package com.nandy.medicalbase.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by yana on 22.03.18.
@@ -16,7 +15,11 @@ public class Comment {
     @Id
     @GeneratedValue
     private long id;
-    private long timestamp;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date createdDate;
+
     private String text;
 
     @JsonIgnore
@@ -25,10 +28,9 @@ public class Comment {
 
     private Comment() { }
 
-    public Comment(final Patient patient, final String text, final long timestamp) {
+    public Comment(final Patient patient, final String text) {
         this.patient = patient;
         this.text = text;
-        this.timestamp = timestamp;
     }
 
 
@@ -40,12 +42,13 @@ public class Comment {
         this.id = id;
     }
 
-    public long getTimestamp() {
-        return timestamp;
+
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getText() {

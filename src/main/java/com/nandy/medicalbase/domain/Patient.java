@@ -1,9 +1,7 @@
 package com.nandy.medicalbase.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,11 +13,14 @@ public class Patient {
     @Id
     @GeneratedValue
     private long id;
-    private long birthTimestamp;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date birthDate;
+
     private String firstName;
     private String lastName;
 
-    private String username;
+    private Sex sex;
 
     private String country;
     private String state;
@@ -30,17 +31,13 @@ public class Patient {
 
     private Patient() { }
 
-    public Patient(final String username) {
-        this.username = username;
+    public Patient(final String firstName, final String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public Sex getSex() {
+        return sex;
     }
 
     public long getId() {
@@ -67,12 +64,12 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public long getBirthTimestamp() {
-        return birthTimestamp;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirthTimestamp(long birthTimestamp) {
-        this.birthTimestamp = birthTimestamp;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getState() {
@@ -105,5 +102,9 @@ public class Patient {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
     }
 }

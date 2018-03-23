@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class PatientRestController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public Patient getById(@PathVariable Long id) {
-        return patientRepository.findOne(id);
+        return findById(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -47,25 +48,18 @@ public class PatientRestController {
     @RequestMapping(method = RequestMethod.PUT)
     public Patient updatePatient(@Valid @RequestBody Patient patient) {
 
-        if (!patientRepository.exists(patient.getId())) {
-            throw new UserNotFoundException(patient.getId());
-        }
+        Patient existingPatient = findById(patient.getId());
 
-        Patient existingPatient = patientRepository.findOne(patient.getId());
         existingPatient.setFirstName(patient.getFirstName());
         existingPatient.setLastName(patient.getLastName());
-        existingPatient.setBirthTimestamp(patient.getBirthTimestamp());
+        existingPatient.setBirthDate(patient.getBirthDate());
         existingPatient.setCountry(patient.getCountry());
         existingPatient.setState(patient.getState());
         existingPatient.setAddress(patient.getAddress());
-        existingPatient.setUsername(patient.getUsername());
+        existingPatient.setSex(patient.getSex());
 
         deleteComments(patient.getId());
-
-        for (Comment comment: patient.getComments()){
-            comment.setPatient(existingPatient);
-            commentRepository.save(comment);
-        }
+        saveComments(existingPatient, patient.getComments());
 
         return patientRepository.save(existingPatient);
     }
@@ -81,5 +75,17 @@ public class PatientRestController {
         for (Comment comment : commentRepository.findByPatientId(patientId)) {
             commentRepository.delete(comment.getId());
         }
+    }
+
+    private void saveComments(Patient patient, Collection<Comment> comments) {
+        for (Comment comment : comments) {
+            comment.setPatient(patient);
+            commentRepository.save(comment);
+        }
+    }
+
+    private Patient findById(Long patientId) {
+        return patientRepository.findById(patientId)
+                .orElseThrow(() -> new UserNotFoundException(patientId));
     }
 }
