@@ -24,16 +24,16 @@
           <thead>
           <tr>
             <th>#</th>
-            <th>Name</th>
-            <th>Medical Note</th>
+            <th>First Name</th>
+            <th>Last Name</th>
             <th></th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let patient of patients">
             <th scope="row">{{patient.id}}</th>
-            <td>{{patient.name}}</td>
-            <td>{{patient.medicalNote}}</td>
+            <td>{{patient.firstName}}</td>
+            <td>{{patient.lastName}}</td>
             <td>
               <button type="button" class="btn btn-success" (click)="editPatientPage(patient)">Edit</button>
               <button type="button" class="btn btn-danger" (click)="deletePatient(patient)">Delete</button>

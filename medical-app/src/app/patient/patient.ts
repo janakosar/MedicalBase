@@ -4,13 +4,13 @@
 export class Patient {
 
   id: number;
-  name: string;
-  medicalNote: string;
+  firstName: string;
+  lastName: string;
 
-  constructor(id: number, name: string, medicalNote: string){
+  constructor(id: number, firstName: string, lastName: string){
     this.id = id;
-    this.name = name;
-    this.medicalNote = medicalNote;
+    this.firstName = firstName;
+    this.lastName = lastName;
   }
 
 }

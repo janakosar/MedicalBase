@@ -16,6 +16,7 @@ import java.util.Collection;
  * Created by yana on 23.03.18.
  */
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/v1/patients/{patientId}/comments")
 public class CommentRestController {

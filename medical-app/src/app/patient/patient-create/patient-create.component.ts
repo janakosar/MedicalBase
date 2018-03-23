@@ -31,8 +31,8 @@ export class PatientCreateComponent implements OnInit, OnDestroy {
     });
 
     this.patientForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      medicalNote: new FormControl('', Validators.required),
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
     });
 
     if (this.id) { //edit form
@@ -40,8 +40,8 @@ export class PatientCreateComponent implements OnInit, OnDestroy {
         patient => {
           this.id = patient.id;
           this.patientForm.patchValue({
-            name: patient.name,
-            medicalNote: patient.medicalNote,
+            fistName: patient.firstName,
+            lastName: patient.lastName,
           });
         },error => {
           console.log(error);
@@ -62,13 +62,13 @@ export class PatientCreateComponent implements OnInit, OnDestroy {
     if (this.patientForm.valid) {
       if (this.id) {
         let patient: Patient = new Patient(this.id,
-          this.patientForm.controls['name'].value,
-          this.patientForm.controls['medicalNote'].value);
+          this.patientForm.controls['firstName'].value,
+          this.patientForm.controls['lastName'].value);
         this.patientService.updatePatient(patient).subscribe();
       } else {
         let patient: Patient = new Patient(null,
-          this.patientForm.controls['name'].value,
-          this.patientForm.controls['medicalNote'].value);
+          this.patientForm.controls['firstName'].value,
+          this.patientForm.controls['lastName'].value);
         this.patientService.savePatient(patient).subscribe();
 
       }

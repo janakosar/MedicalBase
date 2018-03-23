@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by yana on 22.03.18.
  */
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/api/v1/patients")
 public class PatientRestController {
@@ -57,9 +57,7 @@ public class PatientRestController {
         existingPatient.setState(patient.getState());
         existingPatient.setAddress(patient.getAddress());
         existingPatient.setSex(patient.getSex());
-
-        deleteComments(patient.getId());
-        saveComments(existingPatient, patient.getComments());
+        existingPatient.setComments(patient.getComments());
 
         return patientRepository.save(existingPatient);
     }

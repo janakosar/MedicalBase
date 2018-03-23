@@ -5,17 +5,17 @@
         <form novalidate [formGroup]="patientForm" (ngSubmit)="onSubmit()">
           <fieldset>
             <div class="form-group">
-              <label>Name</label>
+              <label>First Name</label>
               <input type="text"
                      class="form-control"
-                     formControlName="name">
+                     formControlName="firstName">
             </div>
 
             <div class="form-group">
-              <label>Medical Note</label>
+              <label>Last Name</label>
               <input type="text"
                      class="form-control"
-                     formControlName="medicalNote">
+                     formControlName="lastName">
             </div>
           </fieldset>
 
