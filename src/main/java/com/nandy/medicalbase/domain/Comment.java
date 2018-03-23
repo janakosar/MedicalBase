@@ -55,4 +55,12 @@ public class Comment {
     public void setText(String text) {
         this.text = text;
     }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
 }

@@ -17,7 +17,7 @@ import java.util.Collection;
  */
 
 @RestController
-@RequestMapping("/{username}/comments")
+@RequestMapping("/api/v1/patients/{patientId}/comments")
 public class CommentRestController {
 
     private final CommentRepository commentRepository;
@@ -31,40 +31,44 @@ public class CommentRestController {
         this.patientRepository = accountRepository;
     }
 
-//    @RequestMapping(method = RequestMethod.GET)
-//    Collection<Comment> readComments(@PathVariable String username) {
-//        this.validateUser(username);
-//        return this.commentRepository.findByPatientUsername(username);
-//    }
+    @RequestMapping(method = RequestMethod.GET)
+    Collection<Comment> getAll(@PathVariable Long patientId) {
+        this.validatePatient(patientId);
+        return this.commentRepository.findByPatientId(patientId);
+    }
 
-//    @RequestMapping(method = RequestMethod.POST)
-//    ResponseEntity<?> add(@PathVariable String userId, @RequestBody Comment input) {
-//        this.validateUser(userId);
-//
-//        return this.patientRepository
-//                .findByUsername(userId)
-//                .map(account -> {
-//                    Comment result = commentRepository.save(new Comment(account,
-//                            input.getText(), input.getTimestamp()));
-//
-//                    URI location = ServletUriComponentsBuilder
-//                            .fromCurrentRequest().path("/{id}")
-//                            .buildAndExpand(result.getId()).toUri();
-//
-//                    return ResponseEntity.created(location).build();
-//                })
-//                .orElse(ResponseEntity.noContent().build());
-//
-//    }
+    @RequestMapping(method = RequestMethod.POST)
+    ResponseEntity<?> add(@PathVariable Long patientId, @RequestBody Comment input) {
+        this.validatePatient(patientId);
 
-//    @RequestMapping(method = RequestMethod.GET, value = "/{commentId}")
-//    Comment readComment(@PathVariable String userId, @PathVariable Long commentId) {
-//        this.validateUser(userId);
-//        return this.commentRepository.findOne(commentId);
-//    }
+        return this.patientRepository.findById(patientId)
+                .map(account -> {
+                    Comment result = commentRepository.save(
+                            new Comment(account, input.getText(), input.getTimestamp()));
 
-//    private void validateUser(String userId) {
-//        this.patientRepository.findByUsername(userId).orElseThrow(
-//                () -> new UserNotFoundException(userId));
-//    }
+                    URI location = ServletUriComponentsBuilder
+                            .fromCurrentRequest().path("/{id}")
+                            .buildAndExpand(result.getId()).toUri();
+
+                    return ResponseEntity.created(location).build();
+                })
+                .orElse(ResponseEntity.noContent().build());
+
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{commentId}")
+    Comment get(@PathVariable Long patientId, @PathVariable Long commentId) {
+        this.validatePatient(patientId);
+        return this.commentRepository.findOne(commentId);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public void delete(@PathVariable Long id){
+        commentRepository.delete(id);
+    }
+
+    private void validatePatient(Long patientId) {
+        this.patientRepository.findById(patientId)
+                .orElseThrow(() -> new UserNotFoundException(patientId));
+    }
 }

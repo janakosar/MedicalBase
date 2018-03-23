@@ -1,5 +1,6 @@
 package com.nandy.medicalbase;
 
+import com.nandy.medicalbase.domain.Comment;
 import com.nandy.medicalbase.domain.Patient;
 import com.nandy.medicalbase.repository.CommentRepository;
 import com.nandy.medicalbase.repository.PatientRepository;
@@ -25,8 +26,8 @@ public class MedicalBaseApplication {
 				.forEach(
 						a -> {
 							Patient patient = patientRepository.save(new Patient(a));
-//							commentRepository.save(new Comment(patient, "http://bookmark.com/1/" + a, System.currentTimeMillis()));
-//							commentRepository.save(new Comment(patient, "http://bookmark.com/2/" + a, System.currentTimeMillis()));
+							commentRepository.save(new Comment(patient, "http://bookmark.com/1/" + a, System.currentTimeMillis()));
+							commentRepository.save(new Comment(patient, "http://bookmark.com/2/" + a, System.currentTimeMillis()));
 						});
 	}
 }

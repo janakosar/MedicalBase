@@ -1,7 +1,9 @@
 package com.nandy.medicalbase;
 
+import com.nandy.medicalbase.domain.Comment;
 import com.nandy.medicalbase.domain.Patient;
 import com.nandy.medicalbase.error.UserNotFoundException;
+import com.nandy.medicalbase.repository.CommentRepository;
 import com.nandy.medicalbase.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +20,13 @@ import java.util.List;
 public class PatientRestController {
 
     private final PatientRepository patientRepository;
+    private final CommentRepository commentRepository;
 
     @Autowired
-    PatientRestController(PatientRepository accountRepository) {
+    PatientRestController(PatientRepository accountRepository,
+                          CommentRepository commentRepository) {
         this.patientRepository = accountRepository;
+        this.commentRepository = commentRepository;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -42,8 +47,8 @@ public class PatientRestController {
     @RequestMapping(method = RequestMethod.PUT)
     public Patient updatePatient(@Valid @RequestBody Patient patient) {
 
-        if (!patientRepository.exists(patient.getId())){
-            throw new UserNotFoundException(String.valueOf(patient.getId()));
+        if (!patientRepository.exists(patient.getId())) {
+            throw new UserNotFoundException(patient.getId());
         }
 
         Patient existingPatient = patientRepository.findOne(patient.getId());
@@ -53,14 +58,28 @@ public class PatientRestController {
         existingPatient.setCountry(patient.getCountry());
         existingPatient.setState(patient.getState());
         existingPatient.setAddress(patient.getAddress());
-//        existingPatient.setComments(patient.getComments());
         existingPatient.setUsername(patient.getUsername());
+
+        deleteComments(patient.getId());
+
+        for (Comment comment: patient.getComments()){
+            comment.setPatient(existingPatient);
+            commentRepository.save(comment);
+        }
 
         return patientRepository.save(existingPatient);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void deletePatient(@PathVariable Long id) {
+
+        deleteComments(id);
         patientRepository.delete(id);
+    }
+
+    private void deleteComments(Long patientId) {
+        for (Comment comment : commentRepository.findByPatientId(patientId)) {
+            commentRepository.delete(comment.getId());
+        }
     }
 }

@@ -9,5 +9,5 @@ import java.util.Collection;
  * Created by yana on 23.03.18.
  */
 public interface CommentRepository extends JpaRepository<Comment, Long> {
-    Collection<Comment> findByPatientUsername(String username);
+    Collection<Comment> findByPatientId(Long id);
 }

@@ -25,8 +25,8 @@ public class Patient {
     private String state;
     private String address;
 
-//    @OneToMany(mappedBy = "patient")
-//    private List<Comment> comments;
+    @OneToMany(mappedBy = "patient")
+    private List<Comment> comments;
 
     private Patient() { }
 
@@ -99,11 +99,11 @@ public class Patient {
         this.address = address;
     }
 
-//    public List<Comment> getComments() {
-//        return comments;
-//    }
-//
-//    public void setComments(List<Comment> comments) {
-//        this.comments = comments;
-//    }
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 }
