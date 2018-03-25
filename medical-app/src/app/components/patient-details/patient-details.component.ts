@@ -1,22 +1,24 @@
 /**
  * Created by yana on 24.03.18.
  */
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {PatientService} from "../../services/patient.service";
 import {Patient} from "../../domain/Patient";
 import {ActivatedRoute} from '@angular/router';
+import {PatientCreateInteractionService} from '../component-interaction-service/patient-create-interaction-service';
+import {Subscription}   from 'rxjs/Subscription';
 
 @Component({
-  selector: 'app-patient-info-block',
-  templateUrl: './patient-info-block.component.html',
-  styleUrls: ['./patient-info-block.component.css'],
-  providers: [PatientService]
+  selector: 'app-patient-details',
+  templateUrl: './patient-details.component.html',
+  styleUrls: ['./patient-details.component.css'],
+  providers: [PatientService, PatientCreateInteractionService]
 
 })
-export class PatientInfoComponent implements OnInit {
+export class PatientDetailsComponent implements OnInit, OnDestroy {
 
   patient: Patient = new Patient();
-  patientId: number;
+  subscription: Subscription;
 
   constructor(private route: ActivatedRoute,
               private patientService: PatientService) {
@@ -26,11 +28,14 @@ export class PatientInfoComponent implements OnInit {
     this.subscribeOnUrlChanges()
   }
 
-  private subscribeOnUrlChanges(){
-    this.route.url.subscribe((u) => {
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
+
+  private subscribeOnUrlChanges() {
+    this.subscription = this.route.url.subscribe((u) => {
       console.log(this.route.snapshot.params);
       this.parseRoute(this.route);
-      this.loadPatientDetails(this.patientId);
     });
   }
 
@@ -49,9 +54,9 @@ export class PatientInfoComponent implements OnInit {
       )
   }
 
-  private parseRoute(route: ActivatedRoute){
+  private parseRoute(route: ActivatedRoute) {
     route.params.subscribe(params => {
-      this.patientId = params['patientId'];
+      this.loadPatientDetails(params['patientId']);
     });
   }
 }

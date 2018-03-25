@@ -1,10 +1,18 @@
 <div class="container">
 
-  <span class="fullNameView">{{patient.firstName}} {{patient.lastName}}</span>
-  <span class="ageView">{{calculateAge(patient.birthDate)}} y.o.</span>
+  <div *ngIf="patient; else newPatient">
+    <span class="fullNameView">{{patient.firstName}} {{patient.lastName}}</span>
+    <span class="ageView">{{calculateAge(patient.birthDate)}} y.o.</span>
+    <button>Edit</button>
+    <button>Delete</button>
 
-  <button>Edit</button>
-  <button>Delete</button>
+  </div>
+
+  <ng-template #newPatient>
+    <span class="fullNameView">New Patient</span>
+    <button (click)="onSavePatientClick()"> Save</button>
+    <button>Cancel</button>
+  </ng-template>
 
   <hr/>
 

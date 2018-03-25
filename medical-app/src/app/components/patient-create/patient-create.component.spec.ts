@@ -1,3 +1,6 @@
+/**
+ * Created by yana on 25.03.18.
+ */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PatientCreateComponent } from './patient-create.component';
@@ -10,7 +13,7 @@ describe('PatientCreateComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ PatientCreateComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
