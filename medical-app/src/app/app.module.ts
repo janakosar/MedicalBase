@@ -16,6 +16,7 @@ import { PatientCreateComponent } from './components/patient-create/patient-crea
 import { PatientDetailsPanelComponent } from './components/patient-details-panel/patient-details-panel.component';
 import { PatientDetailsHeader } from './components/patient-details-header/patient-details-header.component';
 import { PatientInfoComponent } from './components/patient--info-block/patient-info-block.component';
+import { PatientInfoInputBlockComponent } from './components/patient-info-input-block/patient-info-input-block.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PatientInfoComponent } from './components/patient--info-block/patient-i
     PatientCreateComponent,
     PatientInfoComponent,
     PatientDetailsPanelComponent,
-    PatientDetailsHeader
+    PatientDetailsHeader,
+    PatientInfoInputBlockComponent
   ],
 
   imports: [

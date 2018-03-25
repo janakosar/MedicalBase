@@ -24,9 +24,9 @@ export class PatientService {
       .map(res => res.json());
   }
 
-  savePatient(patient: Patient): Observable<Patient> {
+  savePatient(patient: Patient): any {
     return this.http.post(this.apiUrl, patient)
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .map(res => res.json())
   }
 
   deletePatientById(id: number): any {

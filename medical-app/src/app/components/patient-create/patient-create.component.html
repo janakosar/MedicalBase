@@ -1,25 +1,5 @@
-<div class="col" style="background-color: #00b3ee">
-  <section>
-    <form novalidate [formGroup]="patientForm" (ngSubmit)="onSubmit()">
-      <fieldset>
-        <div class="form-group">
-          <label>First Name</label>
-          <input type="text"
-                 class="form-control"
-                 formControlName="firstName">
-        </div>
+<div>
+  <app-patient-details-header></app-patient-details-header>
+  <app-patient-info-input-block></app-patient-info-input-block>
 
-        <div class="form-group">
-          <label>Last Name</label>
-          <input type="text"
-                 class="form-control"
-                 formControlName="lastName">
-        </div>
-      </fieldset>
-
-      <button type="submit" class="btn btn-primary" [disabled]="!patientForm.valid">Submit</button>
-      <button type="button" class="btn btn-warning" (click)="redirectPatientPage()">Cancel</button>
-      <pre>{{patientForm.value | json}}</pre>
-    </form>
-  </section>
 </div>

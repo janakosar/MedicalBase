@@ -31,7 +31,10 @@ export class PatientDetailsHeader implements OnInit {
     this.route.url.subscribe((u) => {
       console.log(this.route.snapshot.params);
       this.parseRoute(this.route);
-      this.loadPatientDetails(this.patientId);
+
+      if (this.patientId){
+        this.loadPatientDetails(this.patientId);
+      }
     });
   }
 
