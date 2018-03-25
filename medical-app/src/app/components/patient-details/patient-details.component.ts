@@ -18,27 +18,35 @@ import {Subscription}   from 'rxjs/Subscription';
 export class PatientDetailsComponent implements OnInit, OnDestroy {
 
   patient: Patient = new Patient();
-  subscription: Subscription;
+  urlSubscription: Subscription;
+  deletePatientEventSubscription: Subscription;
 
   constructor(private route: ActivatedRoute,
-              private patientService: PatientService) {
+              private patientService: PatientService,
+              private patientCreateInteractionService: PatientCreateInteractionService) {
+
+    this.deletePatientEventSubscription =
+      patientCreateInteractionService.onDeletePatientClicked$.subscribe(
+        (patient) => {
+          this.deletePatient(patient)
+        });
   }
 
   ngOnInit() {
     this.subscribeOnUrlChanges()
   }
 
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
+  ngOnDestroy() {
+    this.urlSubscription.unsubscribe();
+    this.deletePatientEventSubscription.unsubscribe();
   }
 
   private subscribeOnUrlChanges() {
-    this.subscription = this.route.url.subscribe((u) => {
+    this.urlSubscription = this.route.url.subscribe((u) => {
       console.log(this.route.snapshot.params);
       this.parseRoute(this.route);
     });
   }
-
 
   private loadPatientDetails(patientId: number) {
     this.patientService.findById(patientId)
@@ -59,5 +67,19 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
       this.loadPatientDetails(params['patientId']);
     });
   }
+
+  deletePatient(patient: Patient) {
+    if (patient) {
+      this.patientService.deletePatientById(patient.id).subscribe(
+        () => {
+          console.log('Patient was successfully deleted')
+        },
+        error => {
+          console.log(error)
+        }
+      );
+    }
+  }
+
 }
 

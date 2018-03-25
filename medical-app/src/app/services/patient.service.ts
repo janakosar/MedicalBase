@@ -31,8 +31,6 @@ export class PatientService {
 
   deletePatientById(id: number): any {
     return this.http.delete(this.apiUrl + '/' + id)
-      .map(res => res.json());
-
   }
 
   updatePatient(patient: Patient): any {

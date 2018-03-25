@@ -26,5 +26,8 @@ export class PatientDetailsHeader  {
   public onSavePatientClick(){
     this.patientCreateInteractionService.savePatientClicked();
   }
+  public onDeletePatientClick(patient: Patient){
+    this.patientCreateInteractionService.deletePatientClicked(patient);
+  }
 
 }
