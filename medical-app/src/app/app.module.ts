@@ -11,6 +11,7 @@ import { PatientListComponent } from './components/patient-list/patient-list.com
 import { SearchBlockComponent } from './components/search-block/search-block.component';
 
 import { PatientDetailsHeader } from './components/patient-details-header/patient-details-header.component';
+import { PatientCreateHeaderComponent } from './components/patient-create-header/patient-create-header.component';
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 import { PatientCreateComponent } from './components/patient-create/patient-create.component';
 
@@ -21,6 +22,7 @@ import { PatientCreateComponent } from './components/patient-create/patient-crea
     SearchBlockComponent,
     PatientDetailsComponent,
     PatientDetailsHeader,
+    PatientCreateHeaderComponent,
     PatientCreateComponent
   ],
 

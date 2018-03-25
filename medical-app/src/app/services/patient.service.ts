@@ -35,12 +35,9 @@ export class PatientService {
 
   updatePatient(patient: Patient): any {
 
-    console.log("Update patient: " + patient.toString());
-
     return this.http.put(this.apiUrl, patient)
-      .map(res=> {
-        console.log("Update response: " + res.json());
-        res.json();
+      .map(res => {
+        return res.json() as Patient;
       });
   }
 

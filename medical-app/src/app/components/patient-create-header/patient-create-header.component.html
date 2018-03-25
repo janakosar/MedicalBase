@@ -1,0 +1,18 @@
+<div class="container">
+
+
+  <div *ngIf="patient; else newPatient">
+    <span class="fullNameView">{{patient.firstName}} {{patient.lastName}}</span>
+    <!--<button (click)="onDeletePatientClick(patient)">Delete</button>-->
+  </div>
+
+  <ng-template #newPatient>
+    <span class="fullNameView">New Patient</span>
+  </ng-template>
+
+  <button (click)="onSavePatientClick()"> Save</button>
+  <button>Cancel</button>
+
+  <hr/>
+
+</div>
