@@ -1,0 +1,29 @@
+span{
+  margin-right: 20px;
+}
+
+.container{
+  display: inline;
+  padding: 10px 25px 10px 25px;
+}
+
+.fullNameView{
+  font-weight: bolder;
+  font-size: larger;
+}
+
+button {
+  border-radius: 2px;
+  border: none;
+  background-color: rgb(33, 150, 88);
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 10px;
+}

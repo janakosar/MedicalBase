@@ -59,29 +59,28 @@ export class PatientCreateComponent implements OnInit, OnDestroy {
 
 
   onSubmit() {
-    if (this.patientForm.valid) {
-      if (this.id) {
-        let patient: Patient = new Patient(
-          this.patientForm.controls['firstName'].value,
-          this.patientForm.controls['lastName'].value,);
-        this.patientService.updatePatient(patient).subscribe();
-      } else {
-        let patient: Patient = new Patient(
-          this.patientForm.controls['firstName'].value,
-          this.patientForm.controls['lastName'].value);
-        this.patientService.savePatient(patient).subscribe();
-
-      }
-
-      this.patientForm.reset();
-      this.router.navigate(['/patients']);
-
-    }
+    // if (this.patientForm.valid) {
+    //   if (this.id) {
+    //     let patient: Patient = new Patient(
+    //       this.patientForm.controls['firstName'].value,
+    //       this.patientForm.controls['lastName'].value);
+    //     this.patientService.updatePatient(patient).subscribe();
+    //   } else {
+    //     let patient: Patient = new Patient(
+    //       this.patientForm.controls['firstName'].value,
+    //       this.patientForm.controls['lastName'].value);
+    //     this.patientService.savePatient(patient).subscribe();
+    //
+    //   }
+    //
+    //   this.patientForm.reset();
+    //   this.router.navigate(['/patients']);
+    //
+    // }
   }
 
   redirectPatientPage() {
     this.router.navigate(['/patients']);
-
   }
 
 }

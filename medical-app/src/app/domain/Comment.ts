@@ -7,9 +7,6 @@ export class Comment{
   private _createdDate: Date;
   private _text: string;
 
-  constructor() {
-  }
-
   constructor(createdDate: Date, text: string) {
     this._createdDate = createdDate;
     this._text = text;

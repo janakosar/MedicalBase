@@ -7,7 +7,7 @@ export class Patient {
   private _id: number;
   private _firstName: string;
   private _lastName: string;
-  private _birthDate: any;
+  private _birthDate: Date;
   private _sex: Sex;
   private _country: string;
   private _state: string;
@@ -16,13 +16,6 @@ export class Patient {
   private _comments: Array<Comment>;
 
   constructor() {}
-
-  constructor(firstName: string,
-              lastName: string) {
-    this._firstName = firstName;
-    this._lastName = lastName;
-  }
-
 
   get id(): number {
     return this._id;
@@ -48,11 +41,11 @@ export class Patient {
     this._lastName = value;
   }
 
-  get birthDate(): any {
+  get birthDate(): Date {
     return this._birthDate;
   }
 
-  set birthDate(value: any) {
+  set birthDate(value: Date) {
     this._birthDate = value;
   }
 

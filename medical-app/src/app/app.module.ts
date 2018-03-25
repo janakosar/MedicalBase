@@ -1,22 +1,39 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+
+import {PatientsPanelComponent} from './components/patients-panel/patients-panel.component'
 import { PatientListComponent } from './components/patient-list/patient-list.component';
+import { SearchBlockComponent } from './components/search-block/search-block.component';
+
+import { PatientCreateComponent } from './components/patient-create/patient-create.component';
+
+import { PatientDetailsPanelComponent } from './components/patient-details-panel/patient-details-panel.component';
+import { PatientDetailsHeader } from './components/patient-details-header/patient-details-header.component';
+import { PatientInfoComponent } from './components/patient--info-block/patient-info-block.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PatientListComponent
+    PatientsPanelComponent,
+    PatientListComponent,
+    SearchBlockComponent,
+    PatientCreateComponent,
+    PatientInfoComponent,
+    PatientDetailsPanelComponent,
+    PatientDetailsHeader
   ],
 
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule
   ],
   providers: [],

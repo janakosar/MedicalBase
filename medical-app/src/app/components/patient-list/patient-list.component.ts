@@ -26,6 +26,9 @@ export class PatientListComponent implements OnInit {
     this.patientService.findAll().subscribe(
       patients => {
         this.patients = patients;
+        if(this.patients.length > 0){
+          this.openPatientDetails(this.patients[0])
+        }
       },
       err => {
         console.log(err);
@@ -33,13 +36,14 @@ export class PatientListComponent implements OnInit {
     );
   }
 
+  openPatientDetails(patient: Patient) {
+    this.router.navigate(['/patient/' + patient.id]);
+  }
+
   redirectNewPatientPage() {
     this.router.navigate(['/patient/create']);
   }
 
-  openPatientDetails(patient: Patient) {
-    console.log("Patient: id: " + JSON.stringify(patient))
-  }
 
   editPatientPage(patient: Patient) {
     if (patient) {
