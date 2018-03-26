@@ -14,6 +14,8 @@ import { PatientDetailsHeader } from './components/patient-details-header/patien
 import { PatientCreateHeaderComponent } from './components/patient-create-header/patient-create-header.component';
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 import { PatientCreateComponent } from './components/patient-create/patient-create.component';
+import {HttpClientModule} from "@angular/common/http";
+import {PatientService} from "./services/patient.service";
 
 @NgModule({
   declarations: [
@@ -31,9 +33,10 @@ import { PatientCreateComponent } from './components/patient-create/patient-crea
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [PatientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,7 +12,7 @@ import {Subscription}   from 'rxjs/Subscription';
   selector: 'app-patient-details',
   templateUrl: './patient-details.component.html',
   styleUrls: ['./patient-details.component.css'],
-  providers: [PatientService, PatientCreateInteractionService]
+  providers: [PatientCreateInteractionService]
 
 })
 export class PatientDetailsComponent implements OnInit, OnDestroy {
@@ -43,23 +43,12 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
 
   private subscribeOnUrlChanges() {
     this.urlSubscription = this.route.url.subscribe((u) => {
-      console.log(this.route.snapshot.params);
       this.parseRoute(this.route);
     });
   }
 
-  private loadPatientDetails(patientId: number) {
-    this.patientService.findById(patientId)
-      .subscribe(
-        response => {
-          this.patient = response as Patient
-        },
-        error => {
-          console.log(error)
-        },
-        () => {
-        }
-      )
+  private async loadPatientDetails(patientId: number) {
+    this.patient  = await this.patientService.findById(patientId);
   }
 
   private parseRoute(route: ActivatedRoute) {
@@ -68,16 +57,9 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
-  deletePatient(patient: Patient) {
+  async deletePatient(patient: Patient) {
     if (patient) {
-      this.patientService.deletePatientById(patient.id).subscribe(
-        () => {
-          console.log('Patient was successfully deleted')
-        },
-        error => {
-          console.log(error)
-        }
-      );
+      this.patientService.deletePatient(patient);
     }
   }
 

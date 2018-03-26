@@ -8,7 +8,7 @@ import {Patient} from "../../domain/Patient";
 @Injectable()
 export class PatientCreateInteractionService {
 
-  private onSavePatientClickedSource = new Subject<>();
+  private onSavePatientClickedSource = new Subject();
   private onDeletePatientClickedSource = new Subject<Patient>();
 
   onSavePatientClicked$ = this.onSavePatientClickedSource.asObservable();

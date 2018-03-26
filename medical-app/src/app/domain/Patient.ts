@@ -16,4 +16,6 @@ export class Patient {
   comments: Array<Comment>;
 
   constructor() {}
+
+
 }

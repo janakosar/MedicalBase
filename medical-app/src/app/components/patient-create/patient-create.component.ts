@@ -14,7 +14,7 @@ import {DatePipe} from "@angular/common";
   selector: 'app-patient-create',
   templateUrl: './patient-create.component.html',
   styleUrls: ['./patient-create.component.css'],
-  providers: [PatientService, PatientCreateInteractionService]
+  providers: [PatientCreateInteractionService]
 
 })
 export class PatientCreateComponent implements OnInit, OnDestroy {
@@ -74,23 +74,18 @@ export class PatientCreateComponent implements OnInit, OnDestroy {
     });
   }
 
-  private loadPatientDetails(patientId: number) {
-    this.patientService.findById(patientId)
-      .subscribe(
-        res => {
-          this.patient = res as Patient;
+  private async loadPatientDetails(patientId: number) {
+    this.patient = await this.patientService.findById(patientId);
 
-          this.patientForm.patchValue({
-            firstName: this.patient.firstName,
-            lastName: this.patient.lastName,
-            birthDate: this.formatDate(this.patient.birthDate),
-            sex: this.patient.sex,
-            country: this.patient.country,
-            state: this.patient.state,
-            address: this.patient.address
-          });
-        }
-      );
+    this.patientForm.patchValue({
+      firstName: this.patient.firstName,
+      lastName: this.patient.lastName,
+      birthDate: this.formatDate(this.patient.birthDate),
+      sex: this.patient.sex,
+      country: this.patient.country,
+      state: this.patient.state,
+      address: this.patient.address
+    });
 
   }
 
@@ -109,32 +104,26 @@ export class PatientCreateComponent implements OnInit, OnDestroy {
       this.patient.state = this.patientForm.controls['state'].value;
       this.patient.address = this.patientForm.controls['address'].value;
 
-      let patientObservable = this.edit
-        ? this.updatePatient(this.patient)
-        : this.saveNewPatient(this.patient);
-
-      patientObservable.subscribe(
-        res => {
-          this.patient = res;
-          console.log("Patient: " + this.patient);
-          this.router.navigate(['/patient/' + this.patient.id]);
-        },
-        error => {
-          console.log(error)
-        },
-        () => {
-          this.patientForm.reset()
-        });
+      if (this.edit) {
+        this.updatePatient(this.patient);
+      } else {
+        this.saveNewPatient(this.patient);
+      }
     }
   }
 
-  private saveNewPatient(patient: Patient): any {
-    return this.patientService.savePatient(patient)
+  private async saveNewPatient(patient: Patient): any {
+    this.patient = await this.patientService.savePatient(patient);
+    this.router.navigate(['/patient/' + this.patient.id]);
   }
 
+  private async updatePatient(patient: Patient) {
+    this.patient = await this.patientService.updatePatient(patient);
+    this.redirectToPatientPage(this.patient.id);
+  }
 
-  private updatePatient(patient: Patient): any {
-    return this.patientService.updatePatient(patient)
+  private redirectToPatientPage(patientId: number) {
+    this.router.navigate(['/patient/' + patientId]);
   }
 
   private formatDate(date: Date): string {

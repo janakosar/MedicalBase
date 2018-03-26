@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
+import {Injectable} from "@angular/core";
 import {Patient} from "../domain/Patient";
-import {Http, Response} from "@angular/http";
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/catch';
-import {Observable} from "rxjs/Observable";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/catch";
+import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject, Subscription} from "rxjs";
 
 
 @Injectable()
@@ -11,34 +11,108 @@ export class PatientService {
 
   private apiUrl = 'http://localhost:8080/api/v1/patients';
 
-  constructor(private http: Http) {
+  patients: BehaviorSubject<Array<Patient>> = new BehaviorSubject([]);
+  patientsSubscription: Subscription;
+
+  constructor(private http: HttpClient) {}
+
+  subscribeOnPatients() {
+    this.patientsSubscription = this.patients.subscribe();
   }
 
-  findAll(): any {
-    return this.http.get(this.apiUrl)
-      .map(res => res.json());
+  unSubscribeFromPatients() {
+    this.patientsSubscription.unsubscribe();
   }
 
-  findById(id: number): any {
-    return this.http.get(this.apiUrl + '/' + id)
-      .map(res => res.json());
+  async findAll() {
+    const currentPatientList = await this.http.get<Array<Patient>>(this.apiUrl)
+      .toPromise()
+      .catch(error => console.log(error));
+
+    this.patients.next(currentPatientList);
   }
 
-  savePatient(patient: Patient): any {
-    return this.http.post(this.apiUrl, patient)
-      .map(res => res.json())
+
+  async findById(id: number) {
+    return await this.http.get<Patient>(this.apiUrl + '/' + id)
+      .toPromise()
+      .catch(error => console.log(error));
   }
 
-  deletePatientById(id: number): any {
-    return this.http.delete(this.apiUrl + '/' + id)
+  async savePatient(patient: Patient) {
+    const res = await this.http.post<Patient>(this.apiUrl, patient)
+      .toPromise()
+      .catch(error => console.log(error));
+
+    this.addToCollection(res);
+
+    return res;
   }
 
-  updatePatient(patient: Patient): any {
+  async  deletePatient(patient: Patient) {
+    await this.http.delete(this.apiUrl + '/' + patient.id)
+      .toPromise()
+      .then(() => {
+        this.removeFromCollection(patient);
+      })
+      .catch(error => console.log(error));
 
-    return this.http.put(this.apiUrl, patient)
-      .map(res => {
-        return res.json() as Patient;
-      });
+  }
+
+  async updatePatient(patient: Patient) {
+
+    const res = await this.http.put<Patient>(this.apiUrl, patient)
+      .toPromise()
+      .catch(error => console.log(error));
+
+    this.updateInCollection(res);
+
+    return res;
+  }
+
+  private addToCollection(patient: Patient) {
+    let currentValue: Array<Patient> = this.patients.getValue();
+    currentValue.push(patient);
+    this.patients.next(currentValue);
+  }
+
+  private updateInCollection(patient: Patient) {
+    let currentValue: Array<Patient> = this.patients.getValue();
+
+    let positionInTheList = this.findIndexOf(patient, currentValue);
+
+    if (positionInTheList > -1) {
+      currentValue[positionInTheList] = patient;
+    }
+
+    console.log(JSON.stringify(currentValue[positionInTheList]));
+
+    this.patients.next(currentValue);
+  }
+
+  private removeFromCollection(patient: Patient) {
+    let currentValue: Array<Patient> = this.patients.getValue();
+
+    let positionInTheList = this.findIndexOf(patient, currentValue);
+
+    if (positionInTheList > -1) {
+      currentValue.splice(positionInTheList, 1);
+    }
+
+    this.patients.next(currentValue);
+  }
+
+  private findIndexOf(patient: Patient, patients: Array<Patient>): number {
+    let positionInTheList = -1;  //currentValue.indexOf(patient) doesn't work there(
+
+    patients.forEach((item, index) => { //and I don't know why, suppose, it's because
+      if (item.id == patient.id) { //of comparison of those objects
+        positionInTheList = index;
+        return
+      }
+    });
+
+    return positionInTheList;
   }
 
 }

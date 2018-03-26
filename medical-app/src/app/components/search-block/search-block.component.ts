@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-search-block',
   templateUrl: './search-block.component.html',
   styleUrls: ['./search-block.component.css'],
-  providers: [PatientService]
+  providers: []
 
 })
 export class SearchBlockComponent implements OnInit {

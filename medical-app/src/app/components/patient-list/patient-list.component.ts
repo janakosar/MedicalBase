@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Patient} from "../../domain/Patient";
 import {PatientService} from "../../services/patient.service";
 import {Router} from '@angular/router';
@@ -7,60 +7,39 @@ import {Router} from '@angular/router';
   selector: 'app-patient-list',
   templateUrl: './patient-list.component.html',
   styleUrls: ['./patient-list.component.css'],
-  providers: [PatientService]
+  providers: []
 
 })
-export class PatientListComponent implements OnInit {
+export class PatientListComponent implements OnInit, OnDestroy {
 
-  private patients: Patient[];
+  patients: Array<Patient>;
+  isDetailsOpened: boolean;
 
   constructor(private router: Router,
-              private patientService: PatientService) {
+              private patientService: PatientService) {}
+
+  async ngOnInit() {
+    this.patientService.subscribeOnPatients();
+    this.patientService.patients.subscribe(patients =>
+      this.updatePatientsList(patients));
+    this.patientService.findAll();
   }
 
-  ngOnInit() {
-    this.getAllPatients();
+  ngOnDestroy() {
+    this.patientService.unSubscribeFromPatients();
   }
 
-  getAllPatients() {
-    this.patientService.findAll().subscribe(
-      patients => {
-        this.patients = patients;
-        if(this.patients.length > 0){
-          this.openPatientDetails(this.patients[0])
-        }
-      },
-      err => {
-        console.log(err);
-      }
-    );
+  private updatePatientsList(patients: Array<Patient>) {
+    this.patients = patients;
+
+    if (!this.isDetailsOpened && this.patients.length > 0) {
+      this.openPatientDetails(this.patients[0]);
+      this.isDetailsOpened = true;
+    }
   }
 
   openPatientDetails(patient: Patient) {
     this.router.navigate(['/patient/' + patient.id]);
-  }
-
-  redirectNewPatientPage() {
-    this.router.navigate(['/patient/create']);
-  }
-
-
-  editPatientPage(patient: Patient) {
-    if (patient) {
-      this.router.navigate(['/patient/edit', patient.id]);
-    }
-  }
-
-  deletePatient(patient: Patient) {
-    if (patient) {
-      this.patientService.deletePatientById(patient.id).subscribe(
-        res => {
-          this.getAllPatients();
-          this.router.navigate(['/patients']);
-          console.log('done');
-        }
-      );
-    }
   }
 
 }
