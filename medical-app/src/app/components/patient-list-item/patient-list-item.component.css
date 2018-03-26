@@ -1,0 +1,22 @@
+.patient-list-item{
+  border-bottom: solid;
+  border-width: thin;
+  border-bottom-color: rgba(187, 180, 180, 0.5);
+  padding: 10px 25px 10px 25px;
+}
+
+.patient-list-item:active {
+  background-color: rgba(187, 180, 180, 0.45);
+}
+
+#patient-name{
+  font-size: larger;
+  font-weight: bolder;
+  color: #1e8a59;
+}
+
+img{
+  width: 24px;
+  height: 24px;
+  transform: translate(50%,50%);
+}

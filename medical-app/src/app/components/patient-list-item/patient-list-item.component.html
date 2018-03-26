@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="patient-list-item" (click)="openPatientDetails(patient)">
+
+    <div *ngIf="patient.sex=='MALE'; else female">
+      <img src="assets/images/gender-male.png" align="right" alt={{patient.sex}}>
+    </div>
+
+    <ng-template #female>
+      <img src="assets/images/gender-female.png" align="right" alt={{patient.sex}}>
+    </ng-template>
+
+    <div id="patient-name">{{patient.firstName}} {{patient.lastName}}</div>
+    <div>
+      <small>{{patient.birthDate | date}}</small>
+    </div>
+
+  </div>
+</div>
