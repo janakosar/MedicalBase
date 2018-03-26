@@ -17,8 +17,7 @@ public class Comment {
     private long id;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date createdDate;
+    private Date date;
 
     private String text;
 
@@ -43,12 +42,12 @@ public class Comment {
     }
 
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getText() {

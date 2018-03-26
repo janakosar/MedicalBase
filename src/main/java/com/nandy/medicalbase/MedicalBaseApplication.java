@@ -151,11 +151,10 @@ public class MedicalBaseApplication {
                         pa -> {
                             Patient patient = patientRepository.save(pa);
                             Comment c1 = new Comment(patient, "It is first comment of " + patient.getFirstName() + " " + patient.getLastName());
-                            c1.setCreatedDate(new Date());
+                            c1.setDate(new Date());
 
                             Comment c2 = new Comment(patient, "It is another comment of " + patient.getFirstName() + " " + patient.getLastName());
-                            c2.setCreatedDate(new Date());
-
+                            c2.setDate(new Date());
 
                             commentRepository.save(c1);
                             commentRepository.save(c2);

@@ -1,0 +1,18 @@
+<div class="container">
+
+  <section>
+    <form novalidate [formGroup]="commentForm">
+      <fieldset>
+
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="text">
+        </div>
+
+      </fieldset>
+
+    </form>
+  </section>
+
+  <button (click)="addComment()">Add</button>
+
+</div>
