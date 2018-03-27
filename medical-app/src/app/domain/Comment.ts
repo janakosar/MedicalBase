@@ -4,7 +4,7 @@
 export class Comment{
 
   id: number;
-  createdDate: any;
+  createDate: Date;
   text: string;
 
   constructor() {}

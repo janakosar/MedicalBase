@@ -3,7 +3,7 @@
  */
 import {Component, OnInit, OnDestroy, Input} from "@angular/core";
 import {CommentService} from "../../services/comment.service";
-import {Patient} from "../../domain/Patient";
+import {Comment} from "../../domain/Comment";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({

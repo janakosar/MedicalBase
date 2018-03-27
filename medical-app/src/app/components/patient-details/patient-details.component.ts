@@ -48,7 +48,10 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
   }
 
   private async loadPatientDetails(patientId: number) {
-    this.patient  = await this.patientService.findById(patientId);
+    let p  = await this.patientService.findById(patientId);
+    if(p){
+      this.patient = p;
+    }
   }
 
   private parseRoute(route: ActivatedRoute) {

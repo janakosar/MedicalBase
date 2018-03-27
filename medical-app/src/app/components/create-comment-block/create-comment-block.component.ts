@@ -55,7 +55,7 @@ export class CreateCommentBlockComponent implements OnInit, OnDestroy {
     if (this.commentForm.valid) {
 
       let comment = new Comment();
-      comment.createdDate = Date.now();
+      comment.createDate = new Date();
       comment.text = this.commentForm.controls['text'].value;
 
       this.postComment(this.patientId, comment);

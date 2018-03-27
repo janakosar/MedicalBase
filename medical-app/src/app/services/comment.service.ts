@@ -6,6 +6,7 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Subscription} from "rxjs";
+import {Comment} from "../domain/Comment"
 
 
 @Injectable()
@@ -27,18 +28,18 @@ export class CommentService {
   }
 
   async findAll(patientId: number) {
-    const currentPatientList = await this.http.get<Array<Comment>>(this.buildApiUrl(patientId))
+    const currentCommentsList = await this.http.get<Array<Comment>>(this.buildApiUrl(patientId))
       .toPromise()
-      .catch(error => console.log(error));
+      .catch(error => this.handleError(error));
 
-    this.comments.next(currentPatientList);
+    this.comments.next(currentCommentsList);
   }
 
 
   async addComment(patientId: number, comment: Comment) {
     const res = await this.http.post<Comment>(this.buildApiUrl(patientId), comment)
       .toPromise()
-      .catch(error => console.log(error));
+      .catch(error => this.handleError(error));
 
     this.addToCollection(res);
 
@@ -53,6 +54,11 @@ export class CommentService {
 
   private buildApiUrl(patientId: number){
     return this.apiUrl + patientId + "/comments";
+  }
+
+  private handleError(error: Error): any{
+    console.log(error);
+    return null;
   }
 
 }

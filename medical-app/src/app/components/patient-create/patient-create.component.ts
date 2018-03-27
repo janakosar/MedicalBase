@@ -112,7 +112,7 @@ export class PatientCreateComponent implements OnInit, OnDestroy {
     }
   }
 
-  private async saveNewPatient(patient: Patient): any {
+  private async saveNewPatient(patient: Patient) {
     this.patient = await this.patientService.savePatient(patient);
     this.router.navigate(['/patient/' + this.patient.id]);
   }

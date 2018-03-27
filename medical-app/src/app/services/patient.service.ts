@@ -2,8 +2,8 @@ import {Injectable} from "@angular/core";
 import {Patient} from "../domain/Patient";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
-import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Subscription} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 
 @Injectable()
@@ -14,7 +14,8 @@ export class PatientService {
   patients: BehaviorSubject<Array<Patient>> = new BehaviorSubject([]);
   patientsSubscription: Subscription;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   subscribeOnPatients() {
     this.patientsSubscription = this.patients.subscribe();
@@ -27,24 +28,28 @@ export class PatientService {
   async findAll() {
     const currentPatientList = await this.http.get<Array<Patient>>(this.apiUrl)
       .toPromise()
-      .catch(error => console.log(error));
+      .catch(error => this.handleErrror(error));
 
-    this.patients.next(currentPatientList);
+    if (currentPatientList) {
+      this.patients.next(currentPatientList);
+    }
   }
 
 
   async findById(id: number) {
     return await this.http.get<Patient>(this.apiUrl + '/' + id)
       .toPromise()
-      .catch(error => console.log(error));
+      .catch(error => this.handleErrror(error));
   }
 
   async savePatient(patient: Patient) {
     const res = await this.http.post<Patient>(this.apiUrl, patient)
       .toPromise()
-      .catch(error => console.log(error));
+      .catch(error => this.handleErrror(error));
 
-    this.addToCollection(res);
+    if (res) {
+      this.addToCollection(res);
+    }
 
     return res;
   }
@@ -55,7 +60,7 @@ export class PatientService {
       .then(() => {
         this.removeFromCollection(patient);
       })
-      .catch(error => console.log(error));
+      .catch(error => this.handleErrror(error));
 
   }
 
@@ -63,9 +68,11 @@ export class PatientService {
 
     const res = await this.http.put<Patient>(this.apiUrl, patient)
       .toPromise()
-      .catch(error => console.log(error));
+      .catch(error => this.handleErrror(error));
 
-    this.updateInCollection(res);
+    if (res) {
+      this.updateInCollection(res);
+    }
 
     return res;
   }
@@ -115,4 +122,9 @@ export class PatientService {
     return positionInTheList;
   }
 
+
+  private handleErrror(error: Error): any{
+    console.log(error);
+    return null;
+  }
 }

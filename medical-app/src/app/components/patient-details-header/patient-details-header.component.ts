@@ -18,7 +18,7 @@ export class PatientDetailsHeader  {
 
   constructor(private patientCreateInteractionService: PatientCreateInteractionService) {}
 
-  public calculateAge(birthDate: Date): number {
+  public calculateAge(birthDate: any): number {
     let timeDiff = Math.abs(Date.now() - birthDate);
     return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
   }
