@@ -1,32 +1,20 @@
-.container{
-  width: 30%;
-  min-width: 450px;
-  background-color: #424242;
-}
-
 .listHeaderBlock{
   padding: 25px 10px 25px 10px;
 }
 
 .btn{
-  background-color: #4db6ac;
   margin-left: auto;
+  border-width: 2px;
+  border-radius: 0px;
+}
+
+input{
+  border-color: black;
+  border-width: 2px;
+  border-radius: 0px;
 }
 
 hr{
-  margin: 0px;
-  background-color: white;
+  background-color: #363636;
+  margin: 5px 0px 0px 0px;
 }
-
-/*a {*/
-  /*border-radius: 2px;*/
-  /*border: none;*/
-  /*background-color: rgb(33, 150, 88);*/
-  /*color: white;*/
-  /*padding: 5px;*/
-  /*text-align: center;*/
-  /*text-decoration: none;*/
-  /*display: inline-block;*/
-  /*font-size: 14px;*/
-  /*margin-left: 10px;*/
-/*}*/

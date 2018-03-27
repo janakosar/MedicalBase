@@ -1,18 +1,23 @@
-<div class="container">
+<div class="row justify-content-between">
 
-  <section>
-    <form novalidate [formGroup]="commentForm">
-      <fieldset>
+  <div class="col-10">
+    <section>
+      <form novalidate [formGroup]="commentForm">
+        <fieldset>
 
-        <div class="form-group">
-          <input type="text" class="form-control" formControlName="text">
-        </div>
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="text"
+                   aria-describedby="inputGroup-sizing-default" placeholder="Enter comment...">
+          </div>
 
-      </fieldset>
+        </fieldset>
 
-    </form>
-  </section>
+      </form>
+    </section>
+  </div>
 
-  <button (click)="addComment()">Add</button>
+  <div class="col-2">
+    <button class="btn btn-primary btn-outline-dark" type="button" (click)="addComment()">Add</button>
+  </div>
 
 </div>

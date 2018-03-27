@@ -1,11 +1,17 @@
-<div class="container">
+<div class="row align-items-center justify-content-between patient-details-header">
 
-  <span class="fullNameView">{{patient.firstName}} {{patient.lastName}}</span>
-  <span class="ageView">{{calculateAge(patient.birthDate)}} y.o.</span>
+  <div class="row col-8 justify-content-start">
 
-  <a class="btn btn-info" routerLink="/patient/edit/{{patient.id}}">Edit</a>
-  <button (click)="onDeletePatientClick(patient)">Delete</button>
+    <strong class="col-4">{{patient.firstName}} {{patient.lastName}}</strong>
+    <span class="col-3 align-self-center">{{calculateAge(patient.birthDate)}} year(s) old</span>
 
-  <hr/>
+  </div>
+
+  <div class="row col-4 justify-content-end">
+
+    <a class="col-4 btn btn-outline-dark" role="button" routerLink="/patient/edit/{{patient.id}}">Edit</a>
+
+    <button type="button" class="col-4 btn btn-outline-dark" (click)="onDeletePatientClick(patient)">Delete</button>
+  </div>
 
 </div>

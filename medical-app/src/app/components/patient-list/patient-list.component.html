@@ -2,14 +2,18 @@
 
   <div class="row align-items-center listHeaderBlock">
 
-    <input type="text" class="col-8 form-control" [(ngModel)]="searchPatientText"
+    <input type="text" class="col-7 form-control" [(ngModel)]="searchPatientText"
            placeholder="Search" aria-describedby="inputGroup-sizing-default">
 
-    <a class="col-3 btn btn-primary" routerLink="/patient/create" role="button">Add patient</a>
+    <a class="col-4 btn btn-outline-dark" routerLink="/patient/create" role="button">Add patient</a>
   </div>
 
   <hr/>
 
-  <app-patient-list-item *ngFor="let patient of patients | filter : searchPatientText" [patient]="patient">
-  </app-patient-list-item>
+  <div>
+    <app-patient-list-item *ngFor="let patient of patients | filter : searchPatientText" [patient]="patient">
+    </app-patient-list-item>
+  </div>
+
+
 </div>

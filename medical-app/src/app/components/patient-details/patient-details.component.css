@@ -1,3 +1,22 @@
-span{
-  font-weight: bold;
+.container{
+  min-width: 950px;
+}
+
+.main-content{
+  padding: 15px;
+}
+
+.patient-details{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.patient-info{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+hr{
+  background-color: #363636;
+  margin: 5px 0 0 0;
 }

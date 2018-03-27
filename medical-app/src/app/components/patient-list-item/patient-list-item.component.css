@@ -1,8 +1,8 @@
 .patient-list-item{
+  padding: 10px 0px 10px 0px;
   border-bottom: solid;
   border-width: thin;
-  border-bottom-color: rgba(187, 180, 180, 0.5);
-  padding: 10px 0px 10px 0px;
+  border-bottom-color: #616161;
 }
 
 .patient-list-item:hover {
@@ -10,13 +10,13 @@
 }
 
 .patient-list-item:active {
-  background-color: rgba(77, 182, 172, 0.51);
+  background-color: rgba(187, 180, 180, 0.5);
 }
 
 #patient-name{
   font-size: larger;
   font-weight: bolder;
-  color: #e0f2f1;
+  color: black;
 }
 
 small{

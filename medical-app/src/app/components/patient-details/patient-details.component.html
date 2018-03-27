@@ -1,19 +1,46 @@
 <div class="container">
-  <app-patient-details-header [patient] = "patient"></app-patient-details-header>
+  <app-patient-details-header [patient]="patient"></app-patient-details-header>
 
-  <div>
-    <p><span>Date of birth: </span>{{patient.birthDate | date}}</p>
-    <p *ngIf="patient.sex=='MALE'; else female"><span>Sex: </span>Male</p>
+  <hr/>
 
-    <ng-template #female>
-      <p><span>Sex: </span>Female</p>
-    </ng-template>
+  <div class="row justify-content-between main-content">
 
-    <p><span>Country: </span>{{patient.country}}</p>
-    <p><span>State: </span>{{patient.state}}</p>
-    <p><span>Address: </span>{{patient.address}}</p>
+    <div class="col-4 patient-details">
+
+      <div class="row patient-info">
+        <strong class="col">Date of birth: </strong>
+        <div class="col">{{patient.birthDate | date}}</div>
+      </div>
+
+      <div class="row patient-info">
+        <strong class="col">Sex: </strong>
+        <div class="col" *ngIf="patient.sex=='MALE'; else female">Male</div>
+
+        <ng-template #female>
+          <div class="col">Female</div>
+        </ng-template>
+      </div>
+
+      <div class="row patient-info">
+        <strong class="col">Country:</strong>
+        <div class="col">{{patient.country}}</div>
+      </div>
+
+      <div class="row patient-info">
+        <strong class="col">State:</strong>
+        <div class="col">{{patient.state}}</div>
+      </div>
+
+      <div class="row patient-info">
+        <strong class="col">Address:</strong>
+        <div class="col">{{patient.address}}</div>
+      </div>
+
+    </div>
+
+    <div class="col-8">
+      <app-comments-block></app-comments-block>
+    </div>
+
   </div>
-
-  <app-comments-block ></app-comments-block>
-
 </div>
