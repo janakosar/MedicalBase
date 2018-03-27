@@ -3,7 +3,7 @@
  */
 import {Component, Input} from "@angular/core";
 import {Patient} from "../../domain/Patient";
-import {PatientCreateInteractionService} from "../component-interaction-service/patient-create-interaction-service";
+import {PatientCreateInteractionService} from "../../component-interaction-service/patient-create-interaction-service";
 
 @Component({
   selector: 'app-patient-create-header',
@@ -21,8 +21,4 @@ export class PatientCreateHeaderComponent  {
   public onSavePatientClick(){
     this.patientCreateInteractionService.savePatientClicked();
   }
-  public onDeletePatientClick(patient: Patient){
-    this.patientCreateInteractionService.deletePatientClicked(patient);
-  }
-
 }

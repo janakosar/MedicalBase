@@ -5,14 +5,14 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {PatientService} from "../../services/patient.service";
 import {Patient} from "../../domain/Patient";
 import {ActivatedRoute} from '@angular/router';
-import {PatientCreateInteractionService} from '../component-interaction-service/patient-create-interaction-service';
+import {PatientDetailInteractionService} from '../../component-interaction-service/patient-detail-interaction-service';
 import {Subscription}   from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-patient-details',
   templateUrl: './patient-details.component.html',
   styleUrls: ['./patient-details.component.css'],
-  providers: [PatientCreateInteractionService]
+  providers: [PatientDetailInteractionService]
 
 })
 export class PatientDetailsComponent implements OnInit, OnDestroy {
@@ -23,10 +23,10 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private patientService: PatientService,
-              private patientCreateInteractionService: PatientCreateInteractionService) {
+              private patientDetailInteractionService: PatientDetailInteractionService) {
 
     this.deletePatientEventSubscription =
-      patientCreateInteractionService.onDeletePatientClicked$.subscribe(
+      patientDetailInteractionService.onDeletePatientClicked$.subscribe(
         (patient) => {
           this.deletePatient(patient)
         });

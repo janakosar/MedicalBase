@@ -6,7 +6,7 @@ import {PatientService} from "../../services/patient.service";
 import {Patient} from "../../domain/Patient";
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormGroup, Validators, FormControl} from "@angular/forms";
-import {PatientCreateInteractionService} from '../component-interaction-service/patient-create-interaction-service';
+import {PatientCreateInteractionService} from '../../component-interaction-service/patient-create-interaction-service';
 import {Subscription}   from 'rxjs/Subscription';
 import {DatePipe} from "@angular/common";
 

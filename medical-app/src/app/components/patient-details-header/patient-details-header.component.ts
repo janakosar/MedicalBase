@@ -3,7 +3,7 @@
  */
 import {Component, Input} from "@angular/core";
 import {Patient} from "../../domain/Patient";
-import {PatientCreateInteractionService} from "../component-interaction-service/patient-create-interaction-service";
+import {PatientDetailInteractionService} from "../../component-interaction-service/patient-detail-interaction-service";
 
 @Component({
   selector: 'app-patient-details-header',
@@ -17,19 +17,15 @@ export class PatientDetailsHeader {
   @Input()
   patient: Patient;
 
-  constructor(private patientCreateInteractionService: PatientCreateInteractionService) {}
+  constructor(private patientDetailInteractionService: PatientDetailInteractionService) {}
 
   public calculateAge(birthDate: any): number {
     let timeDiff = Math.abs(Date.now() - birthDate);
     return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
   }
 
-  public onSavePatientClick() {
-    this.patientCreateInteractionService.savePatientClicked();
-  }
-
   public onDeletePatientClick(patient: Patient) {
-    this.patientCreateInteractionService.deletePatientClicked(patient);
+    this.patientDetailInteractionService.deletePatientClicked(patient);
   }
 
 }
