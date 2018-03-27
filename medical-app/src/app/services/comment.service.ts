@@ -7,10 +7,11 @@ import "rxjs/add/operator/catch";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Subscription} from "rxjs";
 import {Comment} from "../domain/Comment"
+import {BaseService} from "./BaseService";
 
 
 @Injectable()
-export class CommentService {
+export class CommentService extends BaseService{
 
   private apiUrl = 'http://localhost:8080/api/v1/patients/';
 
@@ -49,8 +50,6 @@ export class CommentService {
   private addToCollection(comment: Comment) {
     let currentValue: Array<Comment> = this.comments.getValue();
 
-    console.log("RES: " + JSON.stringify(comment));
-
     currentValue.push(comment);
     this.comments.next(currentValue);
   }
@@ -59,9 +58,6 @@ export class CommentService {
     return this.apiUrl + patientId + "/comments";
   }
 
-  private handleError(error: Error): any{
-    console.log(error);
-    return null;
-  }
+
 
 }

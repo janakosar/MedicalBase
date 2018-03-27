@@ -40,7 +40,6 @@ public class Comment {
         this.id = id;
     }
 
-
     public Date getCreateDate() {
         return createDate;
     }

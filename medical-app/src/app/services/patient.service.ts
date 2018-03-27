@@ -4,10 +4,11 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import {BehaviorSubject, Subscription} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {BaseService} from "./BaseService";
 
 
 @Injectable()
-export class PatientService {
+export class PatientService extends BaseService{
 
   private apiUrl = 'http://localhost:8080/api/v1/patients';
 
@@ -28,7 +29,7 @@ export class PatientService {
   async findAll() {
     const currentPatientList = await this.http.get<Array<Patient>>(this.apiUrl)
       .toPromise()
-      .catch(error => this.handleErrror(error));
+      .catch(error => this.handleError(error));
 
     if (currentPatientList) {
       this.patients.next(currentPatientList);
@@ -39,13 +40,13 @@ export class PatientService {
   async findById(id: number) {
     return await this.http.get<Patient>(this.apiUrl + '/' + id)
       .toPromise()
-      .catch(error => this.handleErrror(error));
+      .catch(error => this.handleError(error));
   }
 
   async savePatient(patient: Patient) {
     const res = await this.http.post<Patient>(this.apiUrl, patient)
       .toPromise()
-      .catch(error => this.handleErrror(error));
+      .catch(error => this.handleError(error));
 
     if (res) {
       this.addToCollection(res);
@@ -60,7 +61,7 @@ export class PatientService {
       .then(() => {
         this.removeFromCollection(patient);
       })
-      .catch(error => this.handleErrror(error));
+      .catch(error => this.handleError(error));
 
   }
 
@@ -68,7 +69,7 @@ export class PatientService {
 
     const res = await this.http.put<Patient>(this.apiUrl, patient)
       .toPromise()
-      .catch(error => this.handleErrror(error));
+      .catch(error => this.handleError(error));
 
     if (res) {
       this.updateInCollection(res);
@@ -91,8 +92,6 @@ export class PatientService {
     if (positionInTheList > -1) {
       currentValue[positionInTheList] = patient;
     }
-
-    console.log(JSON.stringify(currentValue[positionInTheList]));
 
     this.patients.next(currentValue);
   }
@@ -122,9 +121,4 @@ export class PatientService {
     return positionInTheList;
   }
 
-
-  private handleErrror(error: Error): any{
-    console.log(error);
-    return null;
-  }
 }

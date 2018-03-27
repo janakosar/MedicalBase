@@ -6,10 +6,7 @@
     <a class="btn btn-info" routerLink="/patient/create">Add patient</a>
 
     <hr/>
-
   </div>
-
-
 
   <app-patient-list-item *ngFor="let patient of patients | filter : searchPatientText" [patient] = "patient">
   </app-patient-list-item>

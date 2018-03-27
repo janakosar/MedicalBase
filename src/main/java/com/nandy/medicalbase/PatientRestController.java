@@ -75,13 +75,6 @@ public class PatientRestController {
         }
     }
 
-    private void saveComments(Patient patient, Collection<Comment> comments) {
-        for (Comment comment : comments) {
-            comment.setPatient(patient);
-            commentRepository.save(comment);
-        }
-    }
-
     private Patient findById(Long patientId) {
         return patientRepository.findById(patientId)
                 .orElseThrow(() -> new UserNotFoundException(patientId));

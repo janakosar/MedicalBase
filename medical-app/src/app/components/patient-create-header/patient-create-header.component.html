@@ -3,7 +3,6 @@
 
   <div *ngIf="patient; else newPatient">
     <span class="fullNameView">{{patient.firstName}} {{patient.lastName}}</span>
-    <!--<button (click)="onDeletePatientClick(patient)">Delete</button>-->
   </div>
 
   <ng-template #newPatient>

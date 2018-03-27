@@ -15,6 +15,4 @@ export class CommentListItemComponent {
 
   @Input()
   comment: Comment;
-
-  constructor() {}
 }

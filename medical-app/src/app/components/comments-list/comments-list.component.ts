@@ -1,7 +1,7 @@
 /**
  * Created by yana on 26.03.18.
  */
-import {Component, OnInit, OnDestroy, Input} from "@angular/core";
+import {Component, OnInit, OnDestroy} from "@angular/core";
 import {CommentService} from "../../services/comment.service";
 import {Comment} from "../../domain/Comment";
 import {ActivatedRoute} from "@angular/router";
@@ -15,28 +15,29 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class CommentsListComponent implements OnInit, OnDestroy {
 
+  // @Input() patient: Patient I'd like to inout patient or even patientId
+  //from parent component, but it says that patient is undefined
+  //and I don't know why, so, I'm parsing route, but it's not pretty nice..
+
   comments: Array<Comment>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private commentService: CommentService) {}
+  constructor(private route: ActivatedRoute,
+              private commentService: CommentService) {
+  }
 
   async ngOnInit() {
-
-      this.route.params.subscribe(params => {
-        this.loadComments(params['patientId']);
-      });
+    this.route.params.subscribe(params => {
+      this.loadComments(params['patientId']);
+    });
 
   }
 
-  private loadComments(patientId: number){
+  private loadComments(patientId: number) {
 
     this.commentService.subscribeOnComments();
-    this.commentService.comments.subscribe(comments =>{
-      console.log("Comments: " + JSON.stringify(comments));
+    this.commentService.comments.subscribe(comments => {
       this.comments = comments;
     });
-    console.log("GetCommentsFor: " + patientId);
     this.commentService.findAll(patientId);
   }
 

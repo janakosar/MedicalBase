@@ -10,8 +10,4 @@ import {Component} from "@angular/core";
   providers: []
 
 })
-export class CommentsBlockComponent {
-
-  constructor() {}
-
-}
+export class CommentsBlockComponent {}

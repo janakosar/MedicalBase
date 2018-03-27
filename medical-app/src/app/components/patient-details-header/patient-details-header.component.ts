@@ -12,9 +12,10 @@ import {PatientCreateInteractionService} from "../component-interaction-service/
   providers: []
 
 })
-export class PatientDetailsHeader  {
+export class PatientDetailsHeader {
 
-  @Input() patient: Patient;
+  @Input()
+  patient: Patient;
 
   constructor(private patientCreateInteractionService: PatientCreateInteractionService) {}
 
@@ -23,10 +24,11 @@ export class PatientDetailsHeader  {
     return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
   }
 
-  public onSavePatientClick(){
+  public onSavePatientClick() {
     this.patientCreateInteractionService.savePatientClicked();
   }
-  public onDeletePatientClick(patient: Patient){
+
+  public onDeletePatientClick(patient: Patient) {
     this.patientCreateInteractionService.deletePatientClicked(patient);
   }
 

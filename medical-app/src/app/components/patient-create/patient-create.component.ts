@@ -96,13 +96,13 @@ export class PatientCreateComponent implements OnInit, OnDestroy {
         this.patient = new Patient();
       }
 
-      this.patient.firstName = this.patientForm.controls['firstName'].value;
-      this.patient.lastName = this.patientForm.controls['lastName'].value;
-      this.patient.birthDate = this.patientForm.controls['birthDate'].value;
-      this.patient.sex = this.patientForm.controls['sex'].value;
-      this.patient.country = this.patientForm.controls['country'].value;
-      this.patient.state = this.patientForm.controls['state'].value;
-      this.patient.address = this.patientForm.controls['address'].value;
+      this.patient.firstName = this.getInput('firstName');
+      this.patient.lastName = this.getInput('lastName');
+      this.patient.birthDate = this.getInput('birthDate');
+      this.patient.sex = this.getInput('sex');
+      this.patient.country = this.getInput('country');
+      this.patient.state = this.getInput('state');
+      this.patient.address = this.getInput('address');
 
       if (this.edit) {
         this.updatePatient(this.patient);
@@ -120,6 +120,10 @@ export class PatientCreateComponent implements OnInit, OnDestroy {
   private async updatePatient(patient: Patient) {
     this.patient = await this.patientService.updatePatient(patient);
     this.redirectToPatientPage(this.patient.id);
+  }
+
+  private getInput(inputName: string): any{
+    return this.patientForm.controls[inputName].value;
   }
 
   private redirectToPatientPage(patientId: number) {

@@ -26,7 +26,6 @@ public class MedicalBaseApplication {
         SpringApplication.run(MedicalBaseApplication.class, args);
     }
 
-    // CORS
     @Bean
     FilterRegistrationBean corsFilter(
             @Value("${tagit.origin:http://localhost:4200}") String origin) {
