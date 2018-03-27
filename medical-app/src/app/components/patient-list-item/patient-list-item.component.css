@@ -6,21 +6,24 @@
 }
 
 .patient-list-item:hover {
-  background-color: rgba(187, 180, 180, 0.45);
+  background-color: rgba(114, 114, 114, 0.51);
 }
 
 .patient-list-item:active {
-  background-color: rgba(187, 180, 180, 0.45);
+  background-color: rgba(77, 182, 172, 0.51);
 }
 
 #patient-name{
   font-size: larger;
   font-weight: bolder;
-  color: #1e8a59;
+  color: #e0f2f1;
 }
 
+small{
+  color: #848484;
+
+}
 img{
   width: 24px;
   height: 24px;
-  transform: translate(50%,50%);
 }

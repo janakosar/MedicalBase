@@ -8,6 +8,7 @@
     <a class="col-3 btn btn-primary" routerLink="/patient/create" role="button">Add patient</a>
   </div>
 
+  <hr/>
 
   <app-patient-list-item *ngFor="let patient of patients | filter : searchPatientText" [patient]="patient">
   </app-patient-list-item>
