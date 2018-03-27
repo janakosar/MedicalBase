@@ -4,21 +4,25 @@
 }
 
 .listHeaderBlock{
-  border-bottom: solid;
-  border-width: inherit;
-  border-bottom-color: rgb(0, 0, 0);
+  background: #424242;
+  padding: 25px 10px 25px 10px;
 }
 
-a {
-  margin: 0;
-  border-radius: 2px;
-  border: none;
-  background-color: rgb(33, 150, 88);
-  color: white;
-  padding: 5px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin-left: 10px;
+.btn{
+  background-color: #4db6ac;
+  margin-left: auto;
 }
+
+
+/*a {*/
+  /*border-radius: 2px;*/
+  /*border: none;*/
+  /*background-color: rgb(33, 150, 88);*/
+  /*color: white;*/
+  /*padding: 5px;*/
+  /*text-align: center;*/
+  /*text-decoration: none;*/
+  /*display: inline-block;*/
+  /*font-size: 14px;*/
+  /*margin-left: 10px;*/
+/*}*/

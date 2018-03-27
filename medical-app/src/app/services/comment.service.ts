@@ -7,7 +7,7 @@ import "rxjs/add/operator/catch";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Subscription} from "rxjs";
 import {Comment} from "../domain/Comment"
-import {BaseService} from "./BaseService";
+import {BaseService} from "./base.service";
 
 
 @Injectable()
@@ -18,7 +18,9 @@ export class CommentService extends BaseService{
   comments: BehaviorSubject<Array<Comment>> = new BehaviorSubject([]);
   commentsSubscription: Subscription;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   subscribeOnComments() {
     this.commentsSubscription = this.comments.subscribe();

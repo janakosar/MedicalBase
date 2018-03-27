@@ -4,7 +4,7 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import {BehaviorSubject, Subscription} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {BaseService} from "./BaseService";
+import {BaseService} from "./base.service";
 
 
 @Injectable()
@@ -16,6 +16,7 @@ export class PatientService extends BaseService{
   patientsSubscription: Subscription;
 
   constructor(private http: HttpClient) {
+    super();
   }
 
   subscribeOnPatients() {
