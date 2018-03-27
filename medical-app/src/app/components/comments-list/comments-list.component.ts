@@ -33,6 +33,7 @@ export class CommentsListComponent implements OnInit, OnDestroy {
 
     this.commentService.subscribeOnComments();
     this.commentService.comments.subscribe(comments =>{
+      console.log("Comments: " + JSON.stringify(comments));
       this.comments = comments;
     });
     console.log("GetCommentsFor: " + patientId);

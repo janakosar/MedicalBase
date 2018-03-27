@@ -48,6 +48,9 @@ export class CommentService {
 
   private addToCollection(comment: Comment) {
     let currentValue: Array<Comment> = this.comments.getValue();
+
+    console.log("RES: " + JSON.stringify(comment));
+
     currentValue.push(comment);
     this.comments.next(currentValue);
   }
