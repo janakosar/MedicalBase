@@ -17,6 +17,7 @@ import {CommentsListComponent} from "./components/comments-list/comments-list.co
 import {CommentListItemComponent} from "./components/comment-list-item/comment-list-item.component";
 import {CommentsBlockComponent} from "./components/comments-block/comments-block.component";
 import {CreateCommentBlockComponent} from "./components/create-comment-block/create-comment-block.component";
+import {FilterPipe} from "./pipe/FilterPipe";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {CreateCommentBlockComponent} from "./components/create-comment-block/cre
     CommentsListComponent,
     CommentListItemComponent,
     CommentsBlockComponent,
-    CreateCommentBlockComponent
+    CreateCommentBlockComponent,
+    FilterPipe
   ],
 
   imports: [

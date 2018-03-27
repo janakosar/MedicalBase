@@ -39,20 +39,12 @@ public class CommentRestController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<?> add(@PathVariable Long patientId, @RequestBody Comment input) {
+    Comment add(@PathVariable Long patientId, @RequestBody Comment input) {
         this.validatePatient(patientId);
 
         return this.patientRepository.findById(patientId)
-                .map(patient -> {
-                    Comment result = commentRepository.save(new Comment(patient, input.getText(), input.getCreateDate()));
-
-                    URI location = ServletUriComponentsBuilder
-                            .fromCurrentRequest().path("/{id}")
-                            .buildAndExpand(result.getId()).toUri();
-
-                    return ResponseEntity.created(location).build();
-                })
-                .orElse(ResponseEntity.noContent().build());
+                .map(patient -> commentRepository.save(new Comment(patient, input.getText(), input.getCreateDate())))
+                .orElse(null);
 
     }
 
@@ -63,7 +55,7 @@ public class CommentRestController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         commentRepository.delete(id);
     }
 
