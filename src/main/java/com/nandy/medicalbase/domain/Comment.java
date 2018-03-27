@@ -1,7 +1,6 @@
 package com.nandy.medicalbase.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,7 +16,7 @@ public class Comment {
     private long id;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private Date createDate;
 
     private String text;
 
@@ -27,11 +26,11 @@ public class Comment {
 
     private Comment() { }
 
-    public Comment(final Patient patient, final String text) {
+    public Comment(final Patient patient, final String text, final Date createDate) {
         this.patient = patient;
         this.text = text;
+        this.createDate = createDate;
     }
-
 
     public long getId() {
         return id;
@@ -42,12 +41,12 @@ public class Comment {
     }
 
 
-    public Date getDate() {
-        return date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public String getText() {

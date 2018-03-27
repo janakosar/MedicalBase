@@ -44,7 +44,7 @@ public class CommentRestController {
 
         return this.patientRepository.findById(patientId)
                 .map(patient -> {
-                    Comment result = commentRepository.save(new Comment(patient, input.getText()));
+                    Comment result = commentRepository.save(new Comment(patient, input.getText(), input.getCreateDate()));
 
                     URI location = ServletUriComponentsBuilder
                             .fromCurrentRequest().path("/{id}")

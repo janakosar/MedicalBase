@@ -150,11 +150,9 @@ public class MedicalBaseApplication {
                 .forEach(
                         pa -> {
                             Patient patient = patientRepository.save(pa);
-                            Comment c1 = new Comment(patient, "It is first comment of " + patient.getFirstName() + " " + patient.getLastName());
-                            c1.setDate(new Date());
+                            Comment c1 = new Comment(patient, "It is first comment of " + patient.getFirstName() + " " + patient.getLastName(), new Date());
 
-                            Comment c2 = new Comment(patient, "It is another comment of " + patient.getFirstName() + " " + patient.getLastName());
-                            c2.setDate(new Date());
+                            Comment c2 = new Comment(patient, "It is another comment of " + patient.getFirstName() + " " + patient.getLastName(), new Date());
 
                             commentRepository.save(c1);
                             commentRepository.save(c2);
