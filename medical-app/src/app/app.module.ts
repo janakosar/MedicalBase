@@ -5,7 +5,6 @@ import {AppComponent} from "./app.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {PatientListComponent} from "./components/patient-list/patient-list.component";
 import {PatientListItemComponent} from "./components/patient-list-item/patient-list-item.component";
-import {SearchBlockComponent} from "./components/search-block/search-block.component";
 import {PatientDetailsHeader} from "./components/patient-details-header/patient-details-header.component";
 import {PatientCreateHeaderComponent} from "./components/patient-create-header/patient-create-header.component";
 import {PatientDetailsComponent} from "./components/patient-details/patient-details.component";
@@ -24,7 +23,6 @@ import {FilterPipe} from "./pipe/FilterPipe";
     AppComponent,
     PatientListComponent,
     PatientListItemComponent,
-    SearchBlockComponent,
     PatientDetailsComponent,
     PatientDetailsHeader,
     PatientCreateHeaderComponent,
