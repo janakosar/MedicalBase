@@ -5,6 +5,7 @@ import {Component, OnInit, OnDestroy} from "@angular/core";
 import {CommentService} from "../../services/comment.service";
 import {Comment} from "../../domain/Comment";
 import {ActivatedRoute} from "@angular/router";
+import {CommentEditInteractionService} from "../../component-interaction-service/comment-edit-interaction-service";
 
 @Component({
   selector: 'app-comments-list',
@@ -22,7 +23,8 @@ export class CommentsListComponent implements OnInit, OnDestroy {
   comments: Array<Comment>;
 
   constructor(private route: ActivatedRoute,
-              private commentService: CommentService) {
+              private commentService: CommentService,
+              private commentsIntercationService: CommentEditInteractionService) {
   }
 
   async ngOnInit() {
@@ -45,5 +47,9 @@ export class CommentsListComponent implements OnInit, OnDestroy {
     this.commentService.unSubscribeFromComments();
   }
 
+  public onCommentClick(comment: Comment){
+    console.log("OnCommenrClick: " + JSON.stringify(comment));
+    this.commentsIntercationService.onCommentItemClick(comment);
+  }
 
 }

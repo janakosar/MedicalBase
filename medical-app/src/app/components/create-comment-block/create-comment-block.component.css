@@ -8,4 +8,5 @@ input{
   border: 2px solid black;
   border-radius: 0;
   float: right;
+  margin-left: 2px;
 }

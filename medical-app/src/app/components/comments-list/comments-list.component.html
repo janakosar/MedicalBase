@@ -1,1 +1,1 @@
-<app-comment-list-item *ngFor="let comment of comments" [comment]="comment"></app-comment-list-item>
+<app-comment-list-item *ngFor="let comment of comments" [comment]="comment" (click)="onCommentClick(comment)"></app-comment-list-item>

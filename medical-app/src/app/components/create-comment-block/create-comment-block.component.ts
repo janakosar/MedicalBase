@@ -7,6 +7,7 @@ import {FormGroup, Validators, FormControl} from "@angular/forms";
 import {Subscription} from "rxjs/Subscription";
 import {Comment} from "../../domain/Comment";
 import {CommentService} from "../../services/comment.service";
+import {CommentEditInteractionService} from "../../component-interaction-service/comment-edit-interaction-service";
 
 @Component({
   selector: 'app-create-comment-block',
@@ -21,11 +22,27 @@ export class CreateCommentBlockComponent implements OnInit, OnDestroy {
 
   commentForm: FormGroup;
   subscription: Subscription;
+  commentSubscription: Subscription;
+
+  comment: Comment;
+
+  edit: boolean;
 
   constructor(private route: ActivatedRoute,
-              private commentService: CommentService) {
+              private commentService: CommentService,
+              private commentEditInteracrionService: CommentEditInteractionService) {
 
     this.commentForm = this.buildFormGroup();
+    this.commentSubscription =
+      commentEditInteracrionService.onEditCommentClicked$.subscribe(
+        (comment) => {
+          this.edit = true;
+          this.comment = comment;
+
+          this.commentForm.patchValue({
+            text: comment.text
+          });
+        });
   }
 
   ngOnInit() {
@@ -64,6 +81,31 @@ export class CreateCommentBlockComponent implements OnInit, OnDestroy {
 
   private async postComment(patientId: number, comment: Comment) {
     await this.commentService.addComment(patientId, comment);
+    this.updateUIAfterCommentCreated();
+  }
+
+
+  private async updateComment(patientId: number, comment: Comment) {
+    await this.commentService.updateComment(patientId, comment);
+  }
+
+  public cancel() {
+    this.updateUIAfterCommentCreated();
+  }
+
+  public async saveChanges() {
+
+    this.comment.createDate = new Date();
+    this.comment.text = this.commentForm.controls['text'].value;
+    
+    await this.commentService.updateComment(this.patientId, this.comment);
+    this.updateUIAfterCommentCreated();
+  }
+
+  private updateUIAfterCommentCreated() {
+    this.commentForm.reset();
+    this.comment = null;
+    this.edit = false;
   }
 }
 

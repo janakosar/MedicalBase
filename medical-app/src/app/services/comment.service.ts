@@ -49,6 +49,17 @@ export class CommentService extends BaseService{
     return res;
   }
 
+
+  async updateComment(patientId: number, comment: Comment) {
+    const res = await this.http.put<Comment>(this.buildApiUrl(patientId), comment)
+      .toPromise()
+      .catch(error => this.handleError(error));
+
+    this.updateInCollection(res);
+
+    return res;
+  }
+
   private addToCollection(comment: Comment) {
     let currentValue: Array<Comment> = this.comments.getValue();
 
@@ -60,6 +71,31 @@ export class CommentService extends BaseService{
     return this.apiUrl + patientId + "/comments";
   }
 
+
+  private updateInCollection(comment: Comment) {
+    let currentValue: Array<Comment> = this.comments.getValue();
+
+    let positionInTheList = this.findIndexOf(comment, currentValue);
+
+    if (positionInTheList > -1) {
+      currentValue[positionInTheList] = comment;
+    }
+
+    this.comments.next(currentValue);
+  }
+
+  private findIndexOf(comment: Comment, comments: Array<Comment>): number {
+    let positionInTheList = -1;  //currentValue.indexOf(patient) doesn't work there(
+
+    comments.forEach((item, index) => { //and I don't know why, suppose, it's because
+      if (item.id == comment.id) { //of comparison of those objects
+        positionInTheList = index;
+        return
+      }
+    });
+
+    return positionInTheList;
+  }
 
 
 }
