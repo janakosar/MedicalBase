@@ -35,7 +35,6 @@ public class MedicalBaseApplication {
                 HttpServletRequest request = (HttpServletRequest) req;
                 HttpServletResponse response = (HttpServletResponse) res;
                 String method = request.getMethod();
-                // this origin value could just as easily have come from a database
                 response.setHeader("Access-Control-Allow-Origin", origin);
                 response.setHeader("Access-Control-Allow-Methods",
                         "POST,GET,OPTIONS,DELETE,PUT");
@@ -153,8 +152,11 @@ public class MedicalBaseApplication {
 
                             Comment c2 = new Comment(patient, "It is another comment of " + patient.getFirstName() + " " + patient.getLastName(), new Date());
 
-                            commentRepository.save(c1);
-                            commentRepository.save(c2);
+                            Comment created = commentRepository.save(c1);
+                             commentRepository.save(c2);
+
+                            created.setText("Edited");
+                            commentRepository.save(created);
                         });
     }
 }

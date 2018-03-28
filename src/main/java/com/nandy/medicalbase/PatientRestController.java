@@ -47,19 +47,7 @@ public class PatientRestController {
 
     @RequestMapping(method = RequestMethod.PUT)
     public Patient updatePatient(@Valid @RequestBody Patient patient) {
-
-        Patient existingPatient = findById(patient.getId());
-
-        existingPatient.setFirstName(patient.getFirstName());
-        existingPatient.setLastName(patient.getLastName());
-        existingPatient.setBirthDate(patient.getBirthDate());
-        existingPatient.setCountry(patient.getCountry());
-        existingPatient.setState(patient.getState());
-        existingPatient.setAddress(patient.getAddress());
-        existingPatient.setSex(patient.getSex());
-        existingPatient.setComments(patient.getComments());
-
-        return patientRepository.save(existingPatient);
+        return patientRepository.save(patient);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")

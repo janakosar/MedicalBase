@@ -1,6 +1,7 @@
 package com.nandy.medicalbase;
 
 import com.nandy.medicalbase.domain.Comment;
+import com.nandy.medicalbase.domain.Patient;
 import com.nandy.medicalbase.error.UserNotFoundException;
 import com.nandy.medicalbase.repository.CommentRepository;
 import com.nandy.medicalbase.repository.PatientRepository;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collection;
 
@@ -34,24 +36,28 @@ public class CommentRestController {
 
     @RequestMapping(method = RequestMethod.GET)
     Collection<Comment> getAll(@PathVariable Long patientId) {
-        this.validatePatient(patientId);
         return this.commentRepository.findByPatientId(patientId);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     Comment add(@PathVariable Long patientId, @RequestBody Comment input) {
-        this.validatePatient(patientId);
+        return saveComment(patientId, input);
 
-        return this.patientRepository.findById(patientId)
-                .map(patient -> commentRepository.save(new Comment(patient, input.getText(), input.getCreateDate())))
-                .orElse(null);
+    }
 
+    @RequestMapping(method = RequestMethod.PUT)
+    public Comment update(@PathVariable Long patientId, @RequestBody Comment comment) {
+        return saveComment(patientId, comment);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{commentId}")
     Comment get(@PathVariable Long patientId, @PathVariable Long commentId) {
-        this.validatePatient(patientId);
-        return this.commentRepository.findOne(commentId);
+
+        if (patientRepository.exists(patientId)){
+            return this.commentRepository.findOne(commentId);
+        }else {
+            return null;
+        }
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
@@ -59,8 +65,13 @@ public class CommentRestController {
         commentRepository.delete(id);
     }
 
-    private void validatePatient(Long patientId) {
-        this.patientRepository.findById(patientId)
+    private Comment saveComment(Long patientId, Comment comment) {
+        return this.patientRepository.findById(patientId)
+                .map(patient -> {
+                    comment.setPatient(patient);
+                    return commentRepository.save(comment);
+                })
                 .orElseThrow(() -> new UserNotFoundException(patientId));
     }
+
 }
