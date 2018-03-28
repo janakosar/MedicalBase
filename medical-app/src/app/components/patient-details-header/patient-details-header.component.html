@@ -1,17 +1,14 @@
-<div class="row align-items-center justify-content-between sticky-top patient-details-header">
+<div class="row align-items-center justify-content-between sticky-top container">
 
-  <div class="row col-8 justify-content-start">
 
     <strong class="col-4">{{patient.firstName}} {{patient.lastName}}</strong>
-    <span class="col-3 align-self-center">{{calculateAge(patient.birthDate)}} year(s) old</span>
-
-  </div>
+    <span class="col-4 align-self-center">{{calculateAge(patient.birthDate)}} year(s) old</span>
 
   <div class="row col-4 justify-content-end">
 
     <a class="col-4 btn btn-outline-dark" role="button" routerLink="/patient/edit/{{patient.id}}">Edit</a>
 
-    <button type="button" class="col-4 btn btn-outline-dark" (click)="onDeletePatientClick(patient)">Delete</button>
+    <button  class="col-4 btn btn-outline-dark" type="button" (click)="onDeletePatientClick(patient)">Delete</button>
   </div>
 
 </div>

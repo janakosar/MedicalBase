@@ -1,7 +1,7 @@
-<div class="row align-items-center justify-content-between patient-details-header">
+<div class="row align-items-center justify-content-between container">
 
 
-  <div class="row col-8 justify-content-start">
+  <div class="row col-4 justify-content-start">
 
     <div *ngIf="patient; else newPatient">
       <strong>{{patient.firstName}} {{patient.lastName}}</strong>
@@ -16,7 +16,7 @@
 
     <button class="col-4 btn btn-outline-dark" type="button" (click)="onSavePatientClick()">Save</button>
 
-    <a role="button" class="col-4 btn btn-outline-dark" (click)="goBack()">Cancel</a>
+    <button class="col-4 btn btn-outline-dark" role="button" (click)="goBack()">Cancel</button>
   </div>
 
 </div>

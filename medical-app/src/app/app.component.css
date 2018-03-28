@@ -1,7 +1,18 @@
-main {
+.row {
   display: flex;
+  flex-wrap: wrap;
 }
 
-alert{
-  position: absolute;
+.side {
+  flex: 30%;
+  padding: 20px 30px 20px 30px;
 }
+
+.main {
+  flex: 70%;
+  padding: 20px 30px 20px 30px;
+}
+
+/*.vl {*/
+  /*border-left: 2px solid black;*/
+/*}*/

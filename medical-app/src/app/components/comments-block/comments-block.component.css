@@ -1,9 +1,7 @@
 .container{
   background-color: #d5d5d5;
-  border: solid;
-  border-width: 2px;
+  border: 2px solid;
   padding: 15px;
-  height: 100%;
 }
 
 .title{

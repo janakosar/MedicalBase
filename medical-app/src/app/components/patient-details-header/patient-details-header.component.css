@@ -1,12 +1,13 @@
-.patient-details-header{
-  padding: 25px 30px 25px 30px;
+.container{
+  padding-bottom: 15px;
   background-color: white;
-
+  border-bottom: 2px solid black;
 }
+
 .btn{
   border-width: 2px;
-  border-radius: 0px;
-  margin-left: auto;
+  border-radius: 0;
+  margin-left:5%;
 }
 
 strong{

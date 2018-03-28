@@ -1,15 +1,15 @@
-.container{
-  min-width: 950px;
-  height: 100%;
-}
-
-.main-content{
-  padding: 15px;
+.main-content {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px 0 15px 0;
 }
 
 .patient-details{
-  padding-top: 15px;
-  padding-bottom: 15px;
+  flex: 30%;
+}
+
+.comments-block{
+  flex: 70%;
 }
 
 .patient-info{
@@ -17,10 +17,7 @@
   padding-bottom: 5px;
 }
 
-hr{
-  background-color: #363636;
-  margin: 5px 0 0 0;
-}
+
 
 alert{
   position: absolute;
