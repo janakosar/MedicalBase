@@ -2,9 +2,9 @@
  * Created by yana on 25.03.18.
  */
 import {Component, Input} from "@angular/core";
-import {Patient} from "../../models/Patient";
-import {PatientCreateInteractionService} from "../../component-interaction-service/patient-create-interaction-service";
 import {Location} from "@angular/common";
+import {Patient} from "../../models/Patient";
+import {PatientCreateInteractionService} from "../../../component-interaction-service/patient-create-interaction-service";
 
 @Component({
   selector: 'app-patient-create-header',

@@ -7,7 +7,7 @@ import "rxjs/add/operator/catch";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Subscription} from "rxjs";
 import {Comment} from "../models/Comment"
-import {BaseService} from "./base.service";
+import {BaseService} from "../../services/base.service";
 
 
 @Injectable()

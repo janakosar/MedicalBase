@@ -3,7 +3,7 @@
  */
 import {Component, Input} from "@angular/core";
 import {Patient} from "../../models/Patient";
-import {PatientDetailInteractionService} from "../../component-interaction-service/patient-detail-interaction-service";
+import {PatientDetailInteractionService} from "../../../component-interaction-service/patient-detail-interaction-service";
 
 @Component({
   selector: 'app-patient-details-header',

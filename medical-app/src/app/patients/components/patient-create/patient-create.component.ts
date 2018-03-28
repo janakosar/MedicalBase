@@ -3,12 +3,12 @@
  */
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {PatientService} from "../../services/patient.service";
-import {Patient} from "../../models/Patient";
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormGroup, Validators, FormControl} from "@angular/forms";
-import {PatientCreateInteractionService} from '../../component-interaction-service/patient-create-interaction-service';
 import {Subscription}   from 'rxjs/Subscription';
 import {DatePipe} from "@angular/common";
+import {Patient} from "../../models/Patient";
+import {PatientCreateInteractionService} from "../../../component-interaction-service/patient-create-interaction-service";
 
 @Component({
   selector: 'app-patient-create',

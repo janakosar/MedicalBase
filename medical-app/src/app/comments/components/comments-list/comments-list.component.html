@@ -1,0 +1,7 @@
+<div>
+  <app-comment-list-item *ngFor="let comment of comments" [comment]="comment" (click)="onCommentClick(comment)"></app-comment-list-item>
+
+  <small  *ngIf="comments.length==0">No comments yet</small>
+
+</div>
+

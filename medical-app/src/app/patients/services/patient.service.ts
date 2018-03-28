@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
-import {Patient} from "../models/Patient";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import {BehaviorSubject, Subscription} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {BaseService} from "./base.service";
+import {BaseService} from "../../services/base.service";
+import {Patient} from "../models/Patient";
 
 
 @Injectable()

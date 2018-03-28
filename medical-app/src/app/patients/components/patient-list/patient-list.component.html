@@ -11,6 +11,9 @@
     <div class="patients-list">
       <app-patient-list-item  *ngFor="let patient of patients | filter : searchPatientText" [patient]="patient">
       </app-patient-list-item>
+
+      <small  *ngIf="patients.length==0">No patients</small>
+
     </div>
 
 

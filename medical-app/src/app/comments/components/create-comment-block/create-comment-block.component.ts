@@ -7,7 +7,7 @@ import {FormGroup, Validators, FormControl} from "@angular/forms";
 import {Subscription} from "rxjs/Subscription";
 import {Comment} from "../../models/Comment";
 import {CommentService} from "../../services/comment.service";
-import {CommentEditInteractionService} from "../../component-interaction-service/comment-edit-interaction-service";
+import {CommentEditInteractionService} from "../../../component-interaction-service/comment-edit-interaction-service";
 
 @Component({
   selector: 'app-create-comment-block',

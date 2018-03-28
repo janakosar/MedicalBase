@@ -13,5 +13,5 @@ export class Patient {
   state: string;
   address: string;
 
-  comments: Array<Comment>;
+  constructor(){}
 }

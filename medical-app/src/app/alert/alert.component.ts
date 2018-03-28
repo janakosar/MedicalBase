@@ -2,8 +2,8 @@
  * Created by yana on 28.03.18.
  */
 import {Component, OnInit} from '@angular/core';
+import {AlertService} from "../services/alert.service";
 
-import {AlertService} from '../../services/alert.service';
 
 @Component({
   moduleId: module.id,

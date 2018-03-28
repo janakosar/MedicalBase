@@ -5,7 +5,7 @@ import {Component, OnInit, OnDestroy} from "@angular/core";
 import {CommentService} from "../../services/comment.service";
 import {Comment} from "../../models/Comment";
 import {ActivatedRoute} from "@angular/router";
-import {CommentEditInteractionService} from "../../component-interaction-service/comment-edit-interaction-service";
+import {CommentEditInteractionService} from "../../../component-interaction-service/comment-edit-interaction-service";
 
 @Component({
   selector: 'app-comments-list',

@@ -3,12 +3,11 @@
  */
 import {Component, OnInit, OnDestroy} from "@angular/core";
 import {PatientService} from "../../services/patient.service";
-import {Patient} from "../../models/Patient";
 import {ActivatedRoute} from "@angular/router";
-import {PatientDetailInteractionService} from "../../component-interaction-service/patient-detail-interaction-service";
 import {Subscription} from "rxjs/Subscription";
-import {AlertService} from "../../services/alert.service";
-import {Sex} from "../../models/Sex";
+import {AlertService} from "../../../services/alert.service";
+import {PatientDetailInteractionService} from "../../../component-interaction-service/patient-detail-interaction-service";
+import {Patient} from "../../models/Patient";
 
 @Component({
   selector: 'app-patient-details',
@@ -20,7 +19,6 @@ import {Sex} from "../../models/Sex";
 export class PatientDetailsComponent implements OnInit, OnDestroy {
 
   patient: Patient = new Patient();
-  sexType = Sex;
   urlSubscription: Subscription;
   deletePatientEventSubscription: Subscription;
 
