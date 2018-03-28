@@ -17,6 +17,8 @@ import {CommentListItemComponent} from "./components/comment-list-item/comment-l
 import {CommentsBlockComponent} from "./components/comments-block/comments-block.component";
 import {CreateCommentBlockComponent} from "./components/create-comment-block/create-comment-block.component";
 import {FilterPipe} from "./pipe/FilterPipe";
+import {AlertComponent} from "./components/alert/alert.component";
+import {AlertService} from "./services/alert.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import {FilterPipe} from "./pipe/FilterPipe";
     CommentListItemComponent,
     CommentsBlockComponent,
     CreateCommentBlockComponent,
-    FilterPipe
+    FilterPipe,
+    AlertComponent
   ],
 
   imports: [

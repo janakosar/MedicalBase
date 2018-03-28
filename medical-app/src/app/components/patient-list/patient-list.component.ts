@@ -1,7 +1,8 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy} from "@angular/core";
 import {Patient} from "../../domain/Patient";
 import {PatientService} from "../../services/patient.service";
-import {Router} from '@angular/router';
+import {Router, UrlSegment, PRIMARY_OUTLET, UrlSegmentGroup, UrlTree} from "@angular/router";
+import {exists} from "fs";
 
 @Component({
   selector: 'app-patient-list',
@@ -13,7 +14,6 @@ import {Router} from '@angular/router';
 export class PatientListComponent implements OnInit, OnDestroy {
 
   patients: Array<Patient>;
-  isDetailsOpened: boolean;
 
   constructor(private router: Router,
               private patientService: PatientService) {
@@ -40,12 +40,25 @@ export class PatientListComponent implements OnInit, OnDestroy {
     //I suppose, OrderByPipe with work only with UI list representation,
     //so I need sorted list there..
 
-    if (!this.isDetailsOpened && this.patients.length > 0) {
-      this.openPatientDetails(this.patients[0]);
-      this.isDetailsOpened = true;
+    this.openPatientDetailsIfNeeded();
+  }
+
+  private openPatientDetailsIfNeeded() {
+    const patientId = this.getCurrentPatientId();
+    let exist: boolean = false;
+    if (patientId) {
+      exist = this.exist(this.patients, patientId);
     }
-    //I need to open details of first user in the list by default,
-    //but I'm not sure it's the right way..
+
+    if (patientId < 0 && this.patients.length > 0) {
+      this.openPatientDetails(this.patients[0]);
+    } else if (patientId >= 0 && !exist) {
+      if (this.patients.length > 0) {
+        this.openPatientDetails(this.patients[0]);
+      } else {
+        this.router.navigate(['']);
+      }
+    }
 
   }
 
@@ -53,7 +66,7 @@ export class PatientListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/patient/' + patient.id]);
   }
 
-  private comparePatients(patient1: Patient, patient2: Patient): number{
+  private comparePatients(patient1: Patient, patient2: Patient): number {
     const compareRes = patient1.firstName.localeCompare(patient2.firstName);
 
     if (compareRes != 0) {
@@ -61,6 +74,38 @@ export class PatientListComponent implements OnInit, OnDestroy {
     } else {
       return patient1.lastName.localeCompare(patient2.lastName);
     }
+  }
+
+  private getCurrentPatientId(): number {
+
+    const segments: UrlSegment[] = this.parseUrlSegments(this.router.url);
+
+    if (segments) {
+      return segments[segments.length - 1] as number;
+    } else {
+      return -1;
+    }
+  }
+
+  private parseUrlSegments(url: string): any[] {
+    const urlTree: UrlTree = this.router.parseUrl(url);
+    const urlSegmentGroup: UrlSegmentGroup = urlTree.root.children[PRIMARY_OUTLET];
+
+    if (urlSegmentGroup) {
+      return urlSegmentGroup.segments;
+    }
+  }
+
+  private exist(patients: Patient[], patientId: number): boolean {
+
+    let exist = false;
+
+    patients.some(patient => {
+      exist = patient.id == patientId;
+      return exist;
+    });
+
+    return exist;
   }
 
 }

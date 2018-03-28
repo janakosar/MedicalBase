@@ -7,12 +7,14 @@ import {Patient} from "../../domain/Patient";
 import {ActivatedRoute} from '@angular/router';
 import {PatientDetailInteractionService} from '../../component-interaction-service/patient-detail-interaction-service';
 import {Subscription}   from 'rxjs/Subscription';
+import {$} from "protractor";
+import {AlertService} from "../../services/alert.service";
 
 @Component({
   selector: 'app-patient-details',
   templateUrl: './patient-details.component.html',
   styleUrls: ['./patient-details.component.css'],
-  providers: [PatientDetailInteractionService]
+  providers: [AlertService, PatientDetailInteractionService]
 
 })
 export class PatientDetailsComponent implements OnInit, OnDestroy {
@@ -23,6 +25,7 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private patientService: PatientService,
+              private alertService: AlertService,
               private patientDetailInteractionService: PatientDetailInteractionService) {
 
     this.deletePatientEventSubscription =
@@ -60,9 +63,10 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
-  async deletePatient(patient: Patient) {
+  deletePatient(patient: Patient) {
     if (patient) {
       this.patientService.deletePatient(patient);
+      this.alertService.showAlertMessage("Patient deleted successfully.");
     }
   }
 
