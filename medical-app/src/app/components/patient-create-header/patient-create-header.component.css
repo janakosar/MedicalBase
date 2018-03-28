@@ -1,29 +1,14 @@
-span{
-  margin-right: 20px;
+.patient-details-header{
+  padding: 25px 30px 25px 30px;
+
+}
+.btn{
+  border-width: 2px;
+  border-radius: 0px;
+  margin-left: auto;
 }
 
-.container{
-  display: inline;
-  padding: 10px 25px 10px 25px;
-}
-
-.fullNameView{
+strong{
   font-weight: bolder;
-  font-size: larger;
-}
-
-button, a {
-  border-radius: 2px;
-  border: none;
-  background-color: rgb(33, 150, 88);
-  color: white;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 20px;
-  padding-right: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin-left: 10px;
+  font-size: x-large;
 }

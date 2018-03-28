@@ -1,4 +1,28 @@
 .container{
-  width: 70%;
-  min-width: 600px;
+  min-width: 950px;
+}
+
+
+.patient-details{
+  padding: 30px 15px 30px 15px;
+}
+
+
+.radio-btn{
+  padding-right: 10px;
+}
+
+.radio-inline{
+  margin-right: 15px;
+}
+hr{
+  background-color: #363636;
+  margin: 5px 0 0 0;
+}
+
+
+input, btn{
+  border-color: black;
+  border-width: 2px;
+  border-radius: 0px;
 }
