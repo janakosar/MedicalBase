@@ -3,7 +3,7 @@
  */
 import { Injectable } from '@angular/core';
 import { Subject }    from 'rxjs/Subject';
-import {Comment} from "../domain/Comment";
+import {Comment} from "../models/Comment";
 
 @Injectable()
 export class CommentEditInteractionService {

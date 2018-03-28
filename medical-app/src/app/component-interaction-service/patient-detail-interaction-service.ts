@@ -3,7 +3,7 @@
  */
 import { Injectable } from '@angular/core';
 import { Subject }    from 'rxjs/Subject';
-import {Patient} from "../domain/Patient";
+import {Patient} from "../models/Patient";
 
 @Injectable()
 export class PatientDetailInteractionService {

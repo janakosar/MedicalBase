@@ -3,16 +3,14 @@
  */
 import {Component, OnInit, OnDestroy} from "@angular/core";
 import {CommentService} from "../../services/comment.service";
-import {Comment} from "../../domain/Comment";
+import {Comment} from "../../models/Comment";
 import {ActivatedRoute} from "@angular/router";
 import {CommentEditInteractionService} from "../../component-interaction-service/comment-edit-interaction-service";
 
 @Component({
   selector: 'app-comments-list',
   templateUrl: './comments-list.component.html',
-  styleUrls: ['./comments-list.component.css'],
-  providers: []
-
+  styleUrls: ['./comments-list.component.css']
 })
 export class CommentsListComponent implements OnInit, OnDestroy {
 
@@ -27,7 +25,7 @@ export class CommentsListComponent implements OnInit, OnDestroy {
               private commentsIntercationService: CommentEditInteractionService) {
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.route.params.subscribe(params => {
       this.loadComments(params['patientId']);
     });
@@ -48,7 +46,6 @@ export class CommentsListComponent implements OnInit, OnDestroy {
   }
 
   public onCommentClick(comment: Comment){
-    console.log("OnCommenrClick: " + JSON.stringify(comment));
     this.commentsIntercationService.onCommentItemClick(comment);
   }
 

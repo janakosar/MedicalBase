@@ -14,8 +14,4 @@ export class Patient {
   address: string;
 
   comments: Array<Comment>;
-
-  constructor() {}
-
-
 }

@@ -2,15 +2,13 @@
  * Created by yana on 24.03.18.
  */
 import {Component, Input} from "@angular/core";
-import {Patient} from "../../domain/Patient";
+import {Patient} from "../../models/Patient";
 import {PatientDetailInteractionService} from "../../component-interaction-service/patient-detail-interaction-service";
 
 @Component({
   selector: 'app-patient-details-header',
   templateUrl: './patient-details-header.component.html',
-  styleUrls: ['./patient-details-header.component.css'],
-  providers: []
-
+  styleUrls: ['./patient-details-header.component.css']
 })
 export class PatientDetailsHeader {
 

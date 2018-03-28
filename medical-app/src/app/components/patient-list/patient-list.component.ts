@@ -1,15 +1,12 @@
 import {Component, OnInit, OnDestroy} from "@angular/core";
-import {Patient} from "../../domain/Patient";
+import {Patient} from "../../models/Patient";
 import {PatientService} from "../../services/patient.service";
 import {Router, UrlSegment, PRIMARY_OUTLET, UrlSegmentGroup, UrlTree} from "@angular/router";
-import {exists} from "fs";
 
 @Component({
   selector: 'app-patient-list',
   templateUrl: './patient-list.component.html',
-  styleUrls: ['./patient-list.component.css'],
-  providers: []
-
+  styleUrls: ['./patient-list.component.css']
 })
 export class PatientListComponent implements OnInit, OnDestroy {
 
@@ -63,7 +60,7 @@ export class PatientListComponent implements OnInit, OnDestroy {
   }
 
   openPatientDetails(patient: Patient) {
-    this.router.navigate(['/patient/' + patient.id]);
+    this.router.navigate([`/patient/${patient.id}`]);
   }
 
   private comparePatients(patient1: Patient, patient2: Patient): number {

@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Patient} from "../domain/Patient";
+import {Patient} from "../models/Patient";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import {BehaviorSubject, Subscription} from "rxjs";
@@ -8,7 +8,7 @@ import {BaseService} from "./base.service";
 
 
 @Injectable()
-export class PatientService extends BaseService{
+export class PatientService extends BaseService {
 
   private apiUrl = 'http://localhost:8080/api/v1/patients';
 
@@ -39,7 +39,7 @@ export class PatientService extends BaseService{
 
 
   async findById(id: number) {
-    return await this.http.get<Patient>(this.apiUrl + '/' + id)
+    return await this.http.get<Patient>(`${this.apiUrl}/${id}`)
       .toPromise()
       .catch(error => this.handleError(error));
   }
@@ -57,7 +57,7 @@ export class PatientService extends BaseService{
   }
 
   async  deletePatient(patient: Patient) {
-    await this.http.delete(this.apiUrl + '/' + patient.id)
+    await this.http.delete(`${this.apiUrl}/${patient.id}`)
       .toPromise()
       .then(() => {
         this.removeFromCollection(patient);
@@ -110,10 +110,10 @@ export class PatientService extends BaseService{
   }
 
   private findIndexOf(patient: Patient, patients: Array<Patient>): number {
-    let positionInTheList = -1;  //currentValue.indexOf(patient) doesn't work there(
+    let positionInTheList = -1;
 
-    patients.forEach((item, index) => { //and I don't know why, suppose, it's because
-      if (item.id == patient.id) { //of comparison of those objects
+    patients.forEach((item, index) => {
+      if (item.id == patient.id) {
         positionInTheList = index;
         return
       }

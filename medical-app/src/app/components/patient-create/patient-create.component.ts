@@ -3,7 +3,7 @@
  */
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {PatientService} from "../../services/patient.service";
-import {Patient} from "../../domain/Patient";
+import {Patient} from "../../models/Patient";
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormGroup, Validators, FormControl} from "@angular/forms";
 import {PatientCreateInteractionService} from '../../component-interaction-service/patient-create-interaction-service';
@@ -114,7 +114,7 @@ export class PatientCreateComponent implements OnInit, OnDestroy {
 
   private async saveNewPatient(patient: Patient) {
     this.patient = await this.patientService.savePatient(patient);
-    this.router.navigate(['/patient/' + this.patient.id]);
+    this.router.navigate([`/patient/${this.patient.id}`]);
   }
 
   private async updatePatient(patient: Patient) {
@@ -127,7 +127,7 @@ export class PatientCreateComponent implements OnInit, OnDestroy {
   }
 
   private redirectToPatientPage(patientId: number) {
-    this.router.navigate(['/patient/' + patientId]);
+    this.router.navigate([`/patient/${patientId}`]);
   }
 
   private formatDate(date: Date): string {

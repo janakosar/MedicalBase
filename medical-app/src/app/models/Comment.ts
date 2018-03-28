@@ -7,6 +7,4 @@ export class Comment{
   createDate: Date;
   text: string;
 
-  constructor() {}
-
 }

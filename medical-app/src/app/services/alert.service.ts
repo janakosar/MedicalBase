@@ -23,8 +23,4 @@ export class AlertService {
   alert(message: string) {
     this.subject.next(message);
   }
-
-  clear() {
-    this.subject.next();
-  }
 }

@@ -1,14 +1,14 @@
 /**
  * Created by yana on 24.03.18.
  */
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy} from "@angular/core";
 import {PatientService} from "../../services/patient.service";
-import {Patient} from "../../domain/Patient";
-import {ActivatedRoute} from '@angular/router';
-import {PatientDetailInteractionService} from '../../component-interaction-service/patient-detail-interaction-service';
-import {Subscription}   from 'rxjs/Subscription';
-import {$} from "protractor";
+import {Patient} from "../../models/Patient";
+import {ActivatedRoute} from "@angular/router";
+import {PatientDetailInteractionService} from "../../component-interaction-service/patient-detail-interaction-service";
+import {Subscription} from "rxjs/Subscription";
 import {AlertService} from "../../services/alert.service";
+import {Sex} from "../../models/Sex";
 
 @Component({
   selector: 'app-patient-details',
@@ -20,6 +20,7 @@ import {AlertService} from "../../services/alert.service";
 export class PatientDetailsComponent implements OnInit, OnDestroy {
 
   patient: Patient = new Patient();
+  sexType = Sex;
   urlSubscription: Subscription;
   deletePatientEventSubscription: Subscription;
 
@@ -51,8 +52,8 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
   }
 
   private async loadPatientDetails(patientId: number) {
-    let p  = await this.patientService.findById(patientId);
-    if(p){
+    let p = await this.patientService.findById(patientId);
+    if (p) {
       this.patient = p;
     }
   }

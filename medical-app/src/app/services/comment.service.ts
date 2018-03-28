@@ -6,12 +6,12 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Subscription} from "rxjs";
-import {Comment} from "../domain/Comment"
+import {Comment} from "../models/Comment"
 import {BaseService} from "./base.service";
 
 
 @Injectable()
-export class CommentService extends BaseService{
+export class CommentService extends BaseService {
 
   private apiUrl = 'http://localhost:8080/api/v1/patients/';
 
@@ -67,8 +67,8 @@ export class CommentService extends BaseService{
     this.comments.next(currentValue);
   }
 
-  private buildApiUrl(patientId: number){
-    return this.apiUrl + patientId + "/comments";
+  private buildApiUrl(patientId: number) {
+    return `${this.apiUrl}${patientId}/comments`
   }
 
 
@@ -85,14 +85,18 @@ export class CommentService extends BaseService{
   }
 
   private findIndexOf(comment: Comment, comments: Array<Comment>): number {
-    let positionInTheList = -1;  //currentValue.indexOf(patient) doesn't work there(
+    let positionInTheList = -1;
 
-    comments.forEach((item, index) => { //and I don't know why, suppose, it's because
-      if (item.id == comment.id) { //of comparison of those objects
+    comments.forEach((item, index) => {
+      if (item.id == comment.id) {
         positionInTheList = index;
         return
       }
     });
+
+    //currentValue.indexOf(patient) doesn't work there
+    //and I don't know why, suppose, it's because
+    //of comparison of those objects
 
     return positionInTheList;
   }

@@ -5,16 +5,14 @@ import {Component, OnInit, OnDestroy} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {FormGroup, Validators, FormControl} from "@angular/forms";
 import {Subscription} from "rxjs/Subscription";
-import {Comment} from "../../domain/Comment";
+import {Comment} from "../../models/Comment";
 import {CommentService} from "../../services/comment.service";
 import {CommentEditInteractionService} from "../../component-interaction-service/comment-edit-interaction-service";
 
 @Component({
   selector: 'app-create-comment-block',
   templateUrl: './create-comment-block.component.html',
-  styleUrls: ['./create-comment-block.component.css'],
-  providers: []
-
+  styleUrls: ['./create-comment-block.component.css']
 })
 export class CreateCommentBlockComponent implements OnInit, OnDestroy {
 
@@ -97,7 +95,7 @@ export class CreateCommentBlockComponent implements OnInit, OnDestroy {
 
     this.comment.createDate = new Date();
     this.comment.text = this.commentForm.controls['text'].value;
-    
+
     await this.commentService.updateComment(this.patientId, this.comment);
     this.updateUIAfterCommentCreated();
   }
