@@ -5,9 +5,9 @@ import {Injectable} from "@angular/core";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Subscription} from "rxjs";
-import {Comment} from "../models/Comment"
+import {Comment} from "../models/Comment";
 import {BaseService} from "../../services/base.service";
+import {CommentsBehaviorSubject} from "./comments.behavior.subject";
 
 
 @Injectable()
@@ -15,19 +15,10 @@ export class CommentService extends BaseService {
 
   private apiUrl = 'http://localhost:8080/api/v1/patients/';
 
-  comments: BehaviorSubject<Array<Comment>> = new BehaviorSubject([]);
-  commentsSubscription: Subscription;
+  commentsBehaviorSubject: CommentsBehaviorSubject = new CommentsBehaviorSubject();
 
   constructor(private http: HttpClient) {
     super();
-  }
-
-  subscribeOnComments() {
-    this.commentsSubscription = this.comments.subscribe();
-  }
-
-  unSubscribeFromComments() {
-    this.commentsSubscription.unsubscribe();
   }
 
   async findAll(patientId: number) {
@@ -35,7 +26,7 @@ export class CommentService extends BaseService {
       .toPromise()
       .catch(error => this.handleError(error));
 
-    this.comments.next(currentCommentsList);
+    this.commentsBehaviorSubject.notifySubjectChanged(currentCommentsList);
   }
 
 
@@ -44,7 +35,7 @@ export class CommentService extends BaseService {
       .toPromise()
       .catch(error => this.handleError(error));
 
-    this.addToCollection(res);
+    this.commentsBehaviorSubject.add(res);
 
     return res;
   }
@@ -55,51 +46,12 @@ export class CommentService extends BaseService {
       .toPromise()
       .catch(error => this.handleError(error));
 
-    this.updateInCollection(res);
+    this.commentsBehaviorSubject.replace(res);
 
     return res;
-  }
-
-  private addToCollection(comment: Comment) {
-    let currentValue: Array<Comment> = this.comments.getValue();
-
-    currentValue.push(comment);
-    this.comments.next(currentValue);
   }
 
   private buildApiUrl(patientId: number) {
     return `${this.apiUrl}${patientId}/comments`
   }
-
-
-  private updateInCollection(comment: Comment) {
-    let currentValue: Array<Comment> = this.comments.getValue();
-
-    let positionInTheList = this.findIndexOf(comment, currentValue);
-
-    if (positionInTheList > -1) {
-      currentValue[positionInTheList] = comment;
-    }
-
-    this.comments.next(currentValue);
-  }
-
-  private findIndexOf(comment: Comment, comments: Array<Comment>): number {
-    let positionInTheList = -1;
-
-    comments.forEach((item, index) => {
-      if (item.id == comment.id) {
-        positionInTheList = index;
-        return
-      }
-    });
-
-    //currentValue.indexOf(patient) doesn't work there
-    //and I don't know why, suppose, it's because
-    //of comparison of those objects
-
-    return positionInTheList;
-  }
-
-
 }

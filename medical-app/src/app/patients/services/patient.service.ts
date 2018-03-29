@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
-import {BehaviorSubject, Subscription} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {BaseService} from "../../services/base.service";
 import {Patient} from "../models/Patient";
+import {PatientsBehaviorSubject} from "./patients.behavior.subject";
 
 
 @Injectable()
@@ -12,19 +12,10 @@ export class PatientService extends BaseService {
 
   private apiUrl = 'http://localhost:8080/api/v1/patients';
 
-  patients: BehaviorSubject<Array<Patient>> = new BehaviorSubject([]);
-  patientsSubscription: Subscription;
+  behaviorSubject: PatientsBehaviorSubject = new PatientsBehaviorSubject();
 
   constructor(private http: HttpClient) {
     super();
-  }
-
-  subscribeOnPatients() {
-    this.patientsSubscription = this.patients.subscribe();
-  }
-
-  unSubscribeFromPatients() {
-    this.patientsSubscription.unsubscribe();
   }
 
   async findAll() {
@@ -32,9 +23,7 @@ export class PatientService extends BaseService {
       .toPromise()
       .catch(error => this.handleError(error));
 
-    if (currentPatientList) {
-      this.patients.next(currentPatientList);
-    }
+    this.behaviorSubject.notifySubjectChanged(currentPatientList)
   }
 
 
@@ -49,9 +38,7 @@ export class PatientService extends BaseService {
       .toPromise()
       .catch(error => this.handleError(error));
 
-    if (res) {
-      this.addToCollection(res);
-    }
+    this.behaviorSubject.add(res);
 
     return res;
   }
@@ -60,7 +47,7 @@ export class PatientService extends BaseService {
     await this.http.delete(`${this.apiUrl}/${patient.id}`)
       .toPromise()
       .then(() => {
-        this.removeFromCollection(patient);
+        this.behaviorSubject.remove(patient);
       })
       .catch(error => this.handleError(error));
 
@@ -72,54 +59,9 @@ export class PatientService extends BaseService {
       .toPromise()
       .catch(error => this.handleError(error));
 
-    if (res) {
-      this.updateInCollection(res);
-    }
+    this.behaviorSubject.replace(patient);
 
     return res;
-  }
-
-  private addToCollection(patient: Patient) {
-    let currentValue: Array<Patient> = this.patients.getValue();
-    currentValue.push(patient);
-    this.patients.next(currentValue);
-  }
-
-  private updateInCollection(patient: Patient) {
-    let currentValue: Array<Patient> = this.patients.getValue();
-
-    let positionInTheList = this.findIndexOf(patient, currentValue);
-
-    if (positionInTheList > -1) {
-      currentValue[positionInTheList] = patient;
-    }
-
-    this.patients.next(currentValue);
-  }
-
-  private removeFromCollection(patient: Patient) {
-    let currentValue: Array<Patient> = this.patients.getValue();
-
-    let positionInTheList = this.findIndexOf(patient, currentValue);
-
-    if (positionInTheList > -1) {
-      currentValue.splice(positionInTheList, 1);
-    }
-
-    this.patients.next(currentValue);
-  }
-
-  private findIndexOf(patient: Patient, patients: Array<Patient>): number {
-    let positionInTheList = -1;
-
-    patients.forEach((item, index) => {
-      if (item.id == patient.id) {
-        positionInTheList = index;
-        return
-      }
-    });
-
-    return positionInTheList;
   }
 
 }

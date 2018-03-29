@@ -6,6 +6,7 @@ import {CommentService} from "../../services/comment.service";
 import {Comment} from "../../models/Comment";
 import {ActivatedRoute} from "@angular/router";
 import {CommentEditInteractionService} from "../../../component-interaction-service/comment-edit-interaction-service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-comments-list',
@@ -19,6 +20,7 @@ export class CommentsListComponent implements OnInit, OnDestroy {
   //and I don't know why, so, I'm parsing route, but it's not pretty nice..
 
   comments: Array<Comment>;
+  subscription: Subscription;
 
   constructor(private route: ActivatedRoute,
               private commentService: CommentService,
@@ -34,15 +36,14 @@ export class CommentsListComponent implements OnInit, OnDestroy {
 
   private loadComments(patientId: number) {
 
-    this.commentService.subscribeOnComments();
-    this.commentService.comments.subscribe(comments => {
+    this.subscription = this.commentService.commentsBehaviorSubject.subscribe(comments => {
       this.comments = comments;
     });
     this.commentService.findAll(patientId);
   }
 
   ngOnDestroy() {
-    this.commentService.unSubscribeFromComments();
+    this.subscription.unsubscribe();
   }
 
   public onCommentClick(comment: Comment){

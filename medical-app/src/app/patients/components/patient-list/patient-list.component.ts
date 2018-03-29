@@ -2,6 +2,7 @@ import {Component, OnInit, OnDestroy} from "@angular/core";
 import {Patient} from "../../models/Patient";
 import {PatientService} from "../../services/patient.service";
 import {Router, UrlSegment, PRIMARY_OUTLET, UrlSegmentGroup, UrlTree} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-patient-list',
@@ -11,20 +12,20 @@ import {Router, UrlSegment, PRIMARY_OUTLET, UrlSegmentGroup, UrlTree} from "@ang
 export class PatientListComponent implements OnInit, OnDestroy {
 
   patients: Array<Patient>;
+  subscription: Subscription;
 
   constructor(private router: Router,
               private patientService: PatientService) {
   }
 
   async ngOnInit() {
-    this.patientService.subscribeOnPatients();
-    this.patientService.patients.subscribe(patients =>
-      this.updatePatientsList(patients));
+    this.subscription = this.patientService.behaviorSubject
+      .subscribe(patients => this.updatePatientsList(patients));
     this.patientService.findAll();
   }
 
   ngOnDestroy() {
-    this.patientService.unSubscribeFromPatients();
+    this.subscription.unsubscribe();
   }
 
   private updatePatientsList(patients: Array<Patient>) {
