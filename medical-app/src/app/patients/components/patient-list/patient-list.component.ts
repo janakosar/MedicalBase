@@ -38,7 +38,7 @@ export class PatientListComponent extends LifecycleComponent{
   }
 
   private openPatientDetailsIfNeeded() {
-    const patientId = this.getCurrentPatientId();
+    const patientId: number = this.getCurrentPatientId();
     let exist: boolean = false;
     if (patientId) {
       exist = this.exist(this.patients, patientId);
@@ -70,12 +70,12 @@ export class PatientListComponent extends LifecycleComponent{
     }
   }
 
-  private getCurrentPatientId(): number {
+  private getCurrentPatientId(): any {
 
     const segments: UrlSegment[] = this.parseUrlSegments(this.router.url);
 
     if (segments) {
-      return segments[segments.length - 1] as number;
+      return segments[segments.length - 1];
     } else {
       return -1;
     }
