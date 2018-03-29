@@ -8,4 +8,33 @@ div{
 
 body{
   overflow-x: hidden;
+  height: 100%;
 }
+
+html{
+  height: 100%;
+}
+
+
+strong{
+  white-space: initial;
+}
+
+.container{
+  height: 100%;
+}
+
+.btn {
+  border-color: black;
+  border-width: 2px;
+  border-radius: 0;
+  white-space: initial;
+}
+
+
+.header{
+  padding: 0 30px 0 30px;
+  background-color: white;
+  height: 15%;
+}
+

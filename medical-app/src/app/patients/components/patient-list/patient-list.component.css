@@ -1,36 +1,25 @@
-.search-block{
-  padding: 0 15px 0 30px;
-  background-color: white;
-}
+
+
 
 .row {
-  padding: 20px 0 35px 0;
+  background-color: white;
+  padding: 15px 0 15px 0;
   border-bottom: 2px solid black;
+  height: 100%;
 }
 
 .btn {
   margin-left: auto;
-  border-width: 2px;
-  border-radius: 0px;
 }
 
-/*.patients-list-content{*/
-  /*height: 85%;*/
-/*}*/
-
 .patients-list-block{
-  padding: 0 30px 30px 30px;
-  overflow-y: scroll;
-  height: 82vh;
+  height: 85%;
+  padding: 15px 15px 0 15px;
+  overflow-y: auto;
 }
 
 input {
   border-color: black;
   border-width: 2px;
   border-radius: 0;
-}
-
-hr {
-  background-color: #363636;
-  margin: 5px 0px 0px 0px;
 }

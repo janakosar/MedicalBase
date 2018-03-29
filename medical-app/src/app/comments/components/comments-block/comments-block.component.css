@@ -3,18 +3,28 @@
   border: 2px solid;
   padding: 15px;
   height: 100%;
+  position: relative;
 }
 
 .title{
   padding: 0 15px 0 15px;
+  height: 10%;
 }
 
 .comments-list{
   margin-bottom: 15px;
-  height: 55vh;
-  overflow-y: scroll;
+  overflow-y: auto;
+  height: 75%;
 }
 
+.input-block{
+  height: 15%;
+  padding-left: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 
 strong{
   font-size: x-large;

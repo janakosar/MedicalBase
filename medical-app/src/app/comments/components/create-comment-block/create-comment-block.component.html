@@ -1,6 +1,6 @@
 <div class="row justify-content-between">
 
-  <div [ngClass]="{'col-8': edit, 'col-10': !edit}">
+  <div [ngClass]="{'col-7': edit, 'col-10': !edit}">
     <section>
       <form novalidate [formGroup]="commentForm">
         <fieldset>
@@ -17,7 +17,7 @@
   </div>
 
 
-  <div class="col-4" *ngIf="edit; else create">
+  <div class="col-5" *ngIf="edit; else create">
     <div class="row justify-content-between">
       <button class="col btn btn-primary btn-outline-dark" type="button" (click)="saveChanges()">Save</button>
       <button class="col btn btn-primary btn-outline-dark" type="button" (click)="cancel()">Cancel</button>

@@ -2,22 +2,28 @@
   display: flex;
   flex-wrap: wrap;
   padding: 15px 30px 15px 30px;
+  height: 85%;
+}
+
+.header{
+  padding: 0 0 0 0;
+  height: 15%;
 }
 
 .patient-details{
   flex: 30%;
-  height:500px;
+  height: 100%;
 }
 
 .comments-block{
   flex: 70%;
+  height: 100%;
 }
 
 .patient-info{
   padding-top: 5px;
   padding-bottom: 5px;
 }
-
 
 
 alert{
