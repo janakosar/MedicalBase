@@ -17,10 +17,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @SpringBootApplication
 public class MedicalBaseApplication {
@@ -65,101 +62,96 @@ public class MedicalBaseApplication {
     CommandLineRunner init(PatientRepository patientRepository,
                            CommentRepository commentRepository) {
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_MONTH, 19);
-        calendar.set(Calendar.MONTH, 4);
-        calendar.set(Calendar.YEAR, 1995);
+//        Random random = new Random();
 
-        List<Patient> patients = new ArrayList<>();
-
-        Patient p = new Patient("John", "Snow");
-        p.setBirthDate(calendar.getTime());
-        p.setCountry("USA");
-        p.setState("Colorado");
-        p.setAddress("Colorado Street");
-        p.setSex(Sex.MALE);
-        patients.add(p);
-
-        p = new Patient("Jesica", "Li");
-        calendar.set(Calendar.DAY_OF_MONTH, 17);
-        calendar.set(Calendar.MONTH, 10);
-        calendar.set(Calendar.YEAR, 1990);
-        p.setBirthDate(calendar.getTime());
-        p.setCountry("USA");
-        p.setState("IL");
-        p.setSex(Sex.FEMALE);
-        p.setAddress("Chicago");
-        patients.add(p);
-
-        p = new Patient("Leo", "Tiger");
-        calendar.set(Calendar.DAY_OF_MONTH, 22);
-        calendar.set(Calendar.MONTH, 8);
-        calendar.set(Calendar.YEAR, 1999);
-        p.setBirthDate(calendar.getTime());
-        p.setCountry("USA");
-        p.setSex(Sex.MALE);
-        p.setState("Dakota");
-        p.setAddress("South Dakota");
-        patients.add(p);
-
-        p = new Patient("Max", "Tomson");
-        calendar.set(Calendar.DAY_OF_MONTH, 6);
-        calendar.set(Calendar.MONTH, 6);
-        calendar.set(Calendar.YEAR, 1992);
-        p.setBirthDate(calendar.getTime());
-        p.setCountry("USA");
-        p.setState("IL");
-        p.setAddress("Wermunt");
-        p.setSex(Sex.MALE);
-        patients.add(p);
-
-        p = new Patient("Emmy", "Whitehouse");
-        calendar.set(Calendar.DAY_OF_MONTH, 11);
-        calendar.set(Calendar.MONTH, 9);
-        calendar.set(Calendar.YEAR, 1996);
-        p.setBirthDate(calendar.getTime());
-        p.setCountry("USA");
-        p.setSex(Sex.FEMALE);
-        p.setState("IL");
-        p.setAddress("Denver");
-        patients.add(p);
-
-        p = new Patient("Dilan", "Simon");
-        calendar.set(Calendar.DAY_OF_MONTH, 25);
-        calendar.set(Calendar.MONTH, 11);
-        calendar.set(Calendar.YEAR, 1988);
-        p.setBirthDate(calendar.getTime());
-        p.setCountry("USA");
-        p.setState("LA");
-        p.setAddress("Las-Vegas");
-        p.setSex(Sex.MALE);
-        patients.add(p);
-
-        p = new Patient("Sophie", "Green");
-        calendar.set(Calendar.DAY_OF_MONTH, 15);
-        calendar.set(Calendar.MONTH, 7);
-        calendar.set(Calendar.YEAR, 1993);
-        p.setBirthDate(calendar.getTime());
-        p.setCountry("USA");
-        p.setSex(Sex.FEMALE);
-        p.setState("Wasinghton");
-        p.setAddress("NY");
-        patients.add(p);
-
-
-        return (evt) -> patients
+        return (evt) -> getInitialPatientList()
                 .forEach(
                         pa -> {
                             Patient patient = patientRepository.save(pa);
-                            Comment c1 = new Comment(patient, "It is first comment of " + patient.getFirstName() + " " + patient.getLastName(), new Date());
+                            commentRepository.save(
+                                    new Comment(patient, "Lorem ipsum dolor sit amet.", new Date()));
+                            commentRepository.save(
+                                    new Comment(patient, "Lorem ipsum dolor sit amet.", new Date()));
 
-                            Comment c2 = new Comment(patient, "It is another comment of " + patient.getFirstName() + " " + patient.getLastName(), new Date());
-
-                            Comment created = commentRepository.save(c1);
-                             commentRepository.save(c2);
-
-                            created.setText("Edited");
-                            commentRepository.save(created);
                         });
+    }
+
+//    private void createAndSaveComments(CommentRepository commentRepository,
+//                                       Patient patient,
+//                                       int commentsCount) {
+//
+//        for (int i = 0; i < commentsCount; commentsCount++) {
+//
+//            commentRepository.save(
+//                    new Comment(
+//                            patient,
+//                            "Lorem ipsum dolor sit amet.",
+//                            new Date()));
+//
+//        }
+//    }
+
+    private List<Patient> getInitialPatientList() {
+        List<Patient> patients = new ArrayList<>();
+
+        patients.add(createPatient("Jaime", "Lannister",
+                getDate(19, 4, 1974), Sex.MALE,
+                "The Westerlands", "The Crownlands", "The Crownlands"));
+        patients.add(createPatient("Cersei", "Lannister",
+                getDate(17, 10, 1973), Sex.FEMALE,
+                "The Westerlands", "The Crownlands", "The Crownlands"));
+        patients.add(createPatient("Daenerys", "Targaryen",
+                getDate(22, 8, 1990), Sex.FEMALE,
+                "The Crownlands", "The Crownlands", "The Crownlands"));
+        patients.add(createPatient("Jorah", "Mormont",
+                getDate(6, 6, 1968), Sex.MALE,
+                "The North", "The North", "The North"));
+        patients.add(createPatient("Jon", "Snow",
+                getDate(11, 9, 1985), Sex.MALE,
+                "The North", "The North", "The North"));
+        patients.add(createPatient("Sansa", "Stark",
+                getDate(25, 11, 1990), Sex.FEMALE,
+                "The Crownlands", "The Crownlands", "The Crownlands"));
+        patients.add(createPatient("Arya", "Stark",
+                getDate(15, 7, 1995), Sex.FEMALE,
+                "The North", "The North", "The North"));
+        patients.add(createPatient("Theon", "Greyjoy",
+                getDate(25, 11, 1988), Sex.MALE,
+                "Iron Islands", "Iron Islands", "Iron Islands"));
+        patients.add(createPatient("Tyrion", "Lannister",
+                getDate(15, 7, 1975), Sex.MALE,
+                "The Westerlands", "The Westerlands", "The Westerlands"));
+        patients.add(createPatient("Davos", "Seaworth",
+                getDate(25, 11, 1960), Sex.MALE,
+                "The Stormlands", "The Stormlands", "The Stormlands"));
+        patients.add(createPatient("Ellaria", "Sand",
+                getDate(15, 7, 1979), Sex.FEMALE,
+                "Dorne", "Dorne", "Dorne"));
+
+
+        return patients;
+    }
+
+    private Patient createPatient(String firstName, String lastName,
+                                  Date dateOfBirth, Sex sex,
+                                  String country, String state, String address) {
+        Patient patient = new Patient(firstName, lastName);
+        patient.setBirthDate(dateOfBirth);
+        patient.setSex(sex);
+        patient.setCountry(country);
+        patient.setState(state);
+        patient.setAddress(address);
+
+        return patient;
+    }
+
+    private Date getDate(int day, int month, int year) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.YEAR, year);
+
+        return calendar.getTime();
+
     }
 }
