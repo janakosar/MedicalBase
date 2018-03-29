@@ -100,7 +100,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 var routes = [
-    { path: '', redirectTo: 'patients', pathMatch: 'full' },
+    { path: '', redirectTo: '/patients', pathMatch: 'full' },
     { path: 'patient/create', component: __WEBPACK_IMPORTED_MODULE_2__patients_components_patient_create_patient_create_component__["a" /* PatientCreateComponent */] },
     { path: 'patients/', component: __WEBPACK_IMPORTED_MODULE_4__patients_components_patient_list_patient_list_component__["a" /* PatientListComponent */] },
     { path: 'patient/:patientId', component: __WEBPACK_IMPORTED_MODULE_3__patients_components_patient_details_patient_details_component__["a" /* PatientDetailsComponent */] },
@@ -184,12 +184,14 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__comments_components_index__ = __webpack_require__("./src/app/comments/components/index.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__patients_pipes_filter_pipe__ = __webpack_require__("./src/app/patients/pipes/filter.pipe.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__alert_alert_component__ = __webpack_require__("./src/app/alert/alert.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__angular_common__ = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -229,7 +231,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* ReactiveFormsModule */],
                 __WEBPACK_IMPORTED_MODULE_6__angular_common_http__["b" /* HttpClientModule */]
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_7__patients_services_patient_service__["a" /* PatientService */], __WEBPACK_IMPORTED_MODULE_8__comments_services_comment_service__["a" /* CommentService */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_7__patients_services_patient_service__["a" /* PatientService */], __WEBPACK_IMPORTED_MODULE_8__comments_services_comment_service__["a" /* CommentService */], { provide: __WEBPACK_IMPORTED_MODULE_12__angular_common__["h" /* LocationStrategy */], useClass: __WEBPACK_IMPORTED_MODULE_12__angular_common__["e" /* HashLocationStrategy */] }],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);

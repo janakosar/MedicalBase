@@ -22,6 +22,7 @@ import {
 } from "./comments/components/index";
 import {FilterPipe} from "./patients/pipes/filter.pipe";
 import {AlertComponent} from "./alert/alert.component";
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import {AlertComponent} from "./alert/alert.component";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [PatientService, CommentService],
+  providers: [PatientService, CommentService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule {
