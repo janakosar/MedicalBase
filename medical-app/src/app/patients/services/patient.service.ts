@@ -10,8 +10,6 @@ import {PatientsBehaviorSubject} from "./patients.behavior.subject";
 @Injectable()
 export class PatientService extends BaseService {
 
-  private apiUrl = 'https://medical-base.herokuapp.com/api/v1/patients';
-
   behaviorSubject: PatientsBehaviorSubject = new PatientsBehaviorSubject();
 
   constructor(private http: HttpClient) {

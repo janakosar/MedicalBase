@@ -3,6 +3,8 @@
  */
 export class BaseService {
 
+  protected apiUrl = 'http://localhost:8080/api/v1/patients/';
+
   handleError(error: Error): any {
     console.log(error);
     return null;

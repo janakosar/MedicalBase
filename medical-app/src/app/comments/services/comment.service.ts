@@ -13,8 +13,6 @@ import {CommentsBehaviorSubject} from "./comments.behavior.subject";
 @Injectable()
 export class CommentService extends BaseService {
 
-  private apiUrl = 'https://medical-base.herokuapp.com/api/v1/patients/';
-
   commentsBehaviorSubject: CommentsBehaviorSubject = new CommentsBehaviorSubject();
 
   constructor(private http: HttpClient) {
