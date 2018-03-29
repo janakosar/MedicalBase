@@ -2,6 +2,7 @@
   background-color: #d5d5d5;
   border: 2px solid;
   padding: 15px;
+  height: 100%;
 }
 
 .title{
@@ -10,7 +11,10 @@
 
 .comments-list{
   margin-bottom: 15px;
+  height: 55vh;
+  overflow-y: scroll;
 }
+
 
 strong{
   font-size: x-large;

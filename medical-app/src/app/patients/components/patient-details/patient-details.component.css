@@ -1,11 +1,12 @@
 .main-content {
   display: flex;
   flex-wrap: wrap;
-  padding: 15px 0 15px 0;
+  padding: 15px 30px 15px 30px;
 }
 
 .patient-details{
   flex: 30%;
+  height:500px;
 }
 
 .comments-block{

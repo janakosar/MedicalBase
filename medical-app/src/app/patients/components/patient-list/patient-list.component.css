@@ -1,6 +1,10 @@
-.row {
-  padding-bottom: 15px;
+.search-block{
+  padding: 0 15px 0 30px;
   background-color: white;
+}
+
+.row {
+  padding: 20px 0 35px 0;
   border-bottom: 2px solid black;
 }
 
@@ -10,9 +14,15 @@
   border-radius: 0px;
 }
 
-/*.patients-list{*/
-  /*overflow-y: scroll;*/
+/*.patients-list-content{*/
+  /*height: 85%;*/
 /*}*/
+
+.patients-list-block{
+  padding: 0 30px 30px 30px;
+  overflow-y: scroll;
+  height: 82vh;
+}
 
 input {
   border-color: black;

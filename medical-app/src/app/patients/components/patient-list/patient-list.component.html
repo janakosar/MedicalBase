@@ -1,20 +1,23 @@
 <div class="container">
 
-  <div class="row align-items-center sticky-top">
+  <div class="search-block sticky-top">
 
-    <input type="text" class="col-7 form-control" [(ngModel)]="searchPatientText"
-           placeholder="Search" aria-describedby="inputGroup-sizing-default">
+    <div class="row align-items-center">
 
-    <a class="col-4 btn btn-outline-dark" routerLink="/patient/create" role="button">Add patient</a>
+      <input type="text" class="col-7 form-control" [(ngModel)]="searchPatientText"
+             placeholder="Search" aria-describedby="inputGroup-sizing-default">
+
+      <a class="col-4 btn btn-outline-dark" routerLink="/patient/create" role="button">Add patient</a>
+    </div>
   </div>
 
-    <div class="patients-list">
-      <app-patient-list-item  *ngFor="let patient of patients | filter : searchPatientText" [patient]="patient">
-      </app-patient-list-item>
+  <div class="patients-list-block">
+    <app-patient-list-item *ngFor="let patient of patients | filter : searchPatientText" [patient]="patient">
+    </app-patient-list-item>
 
-      <small  *ngIf="patients.length==0">No patients</small>
+    <small *ngIf="patients.length==0">No patients</small>
 
-    </div>
+  </div>
 
 
 </div>
