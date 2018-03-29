@@ -45,8 +45,8 @@ export class PatientDetailsComponent extends LifecycleComponent {
   }
 
   private subscribeOnUrlChanges() {
-    this.subscription = this.route.url.subscribe((u) => {
-      this.parseRoute(this.route);
+    this.subscription  =this.route.params.subscribe(params => {
+      this.loadPatientDetails(params['patientId']);
     });
   }
 
@@ -55,12 +55,6 @@ export class PatientDetailsComponent extends LifecycleComponent {
     if (p) {
       this.patient = p;
     }
-  }
-
-  private parseRoute(route: ActivatedRoute) {
-    route.params.subscribe(params => {
-      this.loadPatientDetails(params['patientId']);
-    });
   }
 
   deletePatient(patient: Patient) {
