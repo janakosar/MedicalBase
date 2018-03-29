@@ -1,31 +1,27 @@
-import {Component, OnInit, OnDestroy} from "@angular/core";
+import {Component} from "@angular/core";
 import {Patient} from "../../models/Patient";
 import {PatientService} from "../../services/patient.service";
 import {Router, UrlSegment, PRIMARY_OUTLET, UrlSegmentGroup, UrlTree} from "@angular/router";
-import {Subscription} from "rxjs";
+import {LifecycleComponent} from "../../../lifecycle.component";
 
 @Component({
   selector: 'app-patient-list',
   templateUrl: './patient-list.component.html',
   styleUrls: ['./patient-list.component.css']
 })
-export class PatientListComponent implements OnInit, OnDestroy {
+export class PatientListComponent extends LifecycleComponent{
 
   patients: Array<Patient>;
-  subscription: Subscription;
 
   constructor(private router: Router,
               private patientService: PatientService) {
+    super();
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.subscription = this.patientService.behaviorSubject
       .subscribe(patients => this.updatePatientsList(patients));
     this.patientService.findAll();
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
   private updatePatientsList(patients: Array<Patient>) {

@@ -9,6 +9,7 @@ import {Subscription}   from 'rxjs/Subscription';
 import {DatePipe} from "@angular/common";
 import {Patient} from "../../models/Patient";
 import {PatientCreateInteractionService} from "../../../component-interaction-service/patient-create-interaction-service";
+import {LifecycleComponent} from "../../../lifecycle.component";
 
 @Component({
   selector: 'app-patient-create',
@@ -17,29 +18,25 @@ import {PatientCreateInteractionService} from "../../../component-interaction-se
   providers: [PatientCreateInteractionService]
 
 })
-export class PatientCreateComponent implements OnInit, OnDestroy {
+export class PatientCreateComponent extends LifecycleComponent{
 
   patient: Patient;
   edit: boolean;
 
   patientForm: FormGroup;
-  subscription: Subscription;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private patientService: PatientService,
               private patientCreateInteractionService: PatientCreateInteractionService) {
 
+    super();
     this.subscribeOnControlActions();
     this.patientForm = this.buildFormGroup();
   }
 
   ngOnInit() {
     this.parseRoute();
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
   private parseRoute() {

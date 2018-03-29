@@ -8,6 +8,7 @@ import {Subscription} from "rxjs/Subscription";
 import {AlertService} from "../../../services/alert.service";
 import {PatientDetailInteractionService} from "../../../component-interaction-service/patient-detail-interaction-service";
 import {Patient} from "../../models/Patient";
+import {LifecycleComponent} from "../../../lifecycle.component";
 
 @Component({
   selector: 'app-patient-details',
@@ -16,10 +17,9 @@ import {Patient} from "../../models/Patient";
   providers: [AlertService, PatientDetailInteractionService]
 
 })
-export class PatientDetailsComponent implements OnInit, OnDestroy {
+export class PatientDetailsComponent extends LifecycleComponent {
 
   patient: Patient = new Patient();
-  urlSubscription: Subscription;
   deletePatientEventSubscription: Subscription;
 
   constructor(private route: ActivatedRoute,
@@ -39,12 +39,12 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.urlSubscription.unsubscribe();
+    super.ngOnDestroy();
     this.deletePatientEventSubscription.unsubscribe();
   }
 
   private subscribeOnUrlChanges() {
-    this.urlSubscription = this.route.url.subscribe((u) => {
+    this.subscription = this.route.url.subscribe((u) => {
       this.parseRoute(this.route);
     });
   }

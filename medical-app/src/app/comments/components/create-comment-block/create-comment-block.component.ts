@@ -8,18 +8,18 @@ import {Subscription} from "rxjs/Subscription";
 import {Comment} from "../../models/Comment";
 import {CommentService} from "../../services/comment.service";
 import {CommentEditInteractionService} from "../../../component-interaction-service/comment-edit-interaction-service";
+import {LifecycleComponent} from "../../../lifecycle.component";
 
 @Component({
   selector: 'app-create-comment-block',
   templateUrl: './create-comment-block.component.html',
   styleUrls: ['./create-comment-block.component.css']
 })
-export class CreateCommentBlockComponent implements OnInit, OnDestroy {
+export class CreateCommentBlockComponent extends LifecycleComponent{
 
   patientId: number;
 
   commentForm: FormGroup;
-  subscription: Subscription;
   commentSubscription: Subscription;
 
   comment: Comment;
@@ -30,9 +30,10 @@ export class CreateCommentBlockComponent implements OnInit, OnDestroy {
               private commentService: CommentService,
               private commentEditInteracrionService: CommentEditInteractionService) {
 
+    super();
+
     this.commentForm = this.buildFormGroup();
-    this.commentSubscription =
-      commentEditInteracrionService.onEditCommentClicked$.subscribe(
+    this.commentSubscription = commentEditInteracrionService.onEditCommentClicked$.subscribe(
         (comment) => {
           this.edit = true;
           this.comment = comment;
@@ -48,7 +49,8 @@ export class CreateCommentBlockComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    super.ngOnDestroy();
+    this.commentSubscription.unsubscribe();
   }
 
   private parseRoute() {
