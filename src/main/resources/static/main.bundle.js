@@ -824,7 +824,7 @@ var CommentService = /** @class */ (function (_super) {
     function CommentService(http) {
         var _this = _super.call(this) || this;
         _this.http = http;
-        _this.apiUrl = 'http://localhost:8080/api/v1/patients/';
+        _this.apiUrl = 'https://medical-base.herokuapp.com/api/v1/patients/';
         _this.commentsBehaviorSubject = new __WEBPACK_IMPORTED_MODULE_5__comments_behavior_subject__["a" /* CommentsBehaviorSubject */]();
         return _this;
     }
@@ -1970,7 +1970,7 @@ var PatientService = /** @class */ (function (_super) {
     function PatientService(http) {
         var _this = _super.call(this) || this;
         _this.http = http;
-        _this.apiUrl = 'http://localhost:8080/api/v1/patients';
+        _this.apiUrl = 'https://medical-base.herokuapp.com/api/v1/patients';
         _this.behaviorSubject = new __WEBPACK_IMPORTED_MODULE_5__patients_behavior_subject__["a" /* PatientsBehaviorSubject */]();
         return _this;
     }
