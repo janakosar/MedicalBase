@@ -1,17 +1,12 @@
-package com.nandy.medicalbase;
+package com.nandy.medicalbase.controller;
 
 import com.nandy.medicalbase.domain.Comment;
-import com.nandy.medicalbase.domain.Patient;
 import com.nandy.medicalbase.error.UserNotFoundException;
 import com.nandy.medicalbase.repository.CommentRepository;
 import com.nandy.medicalbase.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
-import java.net.URI;
 import java.util.Collection;
 
 /**
@@ -23,20 +18,19 @@ import java.util.Collection;
 @RequestMapping("/api/v1/patients/{patientId}/comments")
 public class CommentRestController {
 
-    private final CommentRepository commentRepository;
-
-    private final PatientRepository patientRepository;
+    private final CommentRepository mCommentRepository;
+    private final PatientRepository mPatientRepository;
 
     @Autowired
     CommentRestController(CommentRepository commentRepository,
                           PatientRepository accountRepository) {
-        this.commentRepository = commentRepository;
-        this.patientRepository = accountRepository;
+        this.mCommentRepository = commentRepository;
+        this.mPatientRepository = accountRepository;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     Collection<Comment> getAll(@PathVariable Long patientId) {
-        return this.commentRepository.findByPatientId(patientId);
+        return this.mCommentRepository.findByPatientId(patientId);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -53,8 +47,8 @@ public class CommentRestController {
     @RequestMapping(method = RequestMethod.GET, value = "/{commentId}")
     Comment get(@PathVariable Long patientId, @PathVariable Long commentId) {
 
-        if (patientRepository.exists(patientId)){
-            return this.commentRepository.findOne(commentId);
+        if (mPatientRepository.exists(patientId)){
+            return this.mCommentRepository.findOne(commentId);
         }else {
             return null;
         }
@@ -62,14 +56,14 @@ public class CommentRestController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable Long id) {
-        commentRepository.delete(id);
+        mCommentRepository.delete(id);
     }
 
     private Comment saveComment(Long patientId, Comment comment) {
-        return this.patientRepository.findById(patientId)
+        return this.mPatientRepository.findById(patientId)
                 .map(patient -> {
                     comment.setPatient(patient);
-                    return commentRepository.save(comment);
+                    return mCommentRepository.save(comment);
                 })
                 .orElseThrow(() -> new UserNotFoundException(patientId));
     }
