@@ -5,7 +5,7 @@ import {Comment} from "../models/Comment"
  * Created by yana on 29.03.18.
  */
 
-export class CommentsBehaviorSubject extends BaseBehaviorSubject{
+export class CommentsBehaviorSubject extends BaseBehaviorSubject<Comment>{
 
   constructor() {
     super();

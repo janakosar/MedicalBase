@@ -26,6 +26,7 @@ export class PatientDetailsComponent extends LifecycleComponent {
               private patientService: PatientService,
               private alertService: AlertService,
               private patientDetailInteractionService: PatientDetailInteractionService) {
+    super();
 
     this.deletePatientEventSubscription =
       patientDetailInteractionService.onDeletePatientClicked$.subscribe(

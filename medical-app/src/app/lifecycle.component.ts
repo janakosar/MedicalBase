@@ -5,7 +5,7 @@ import {Subscription} from "rxjs";
  */
 export class LifecycleComponent implements OnInit, OnDestroy{
 
-  subscription: Subscription;
+  public subscription: Subscription;
 
   constructor(){}
 
