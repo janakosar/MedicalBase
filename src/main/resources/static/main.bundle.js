@@ -2149,7 +2149,7 @@ var AlertService = /** @class */ (function () {
  */
 var BaseService = /** @class */ (function () {
     function BaseService() {
-        this.apiUrl = 'http://localhost:8080/api/v1/patients/';
+        this.apiUrl = 'https://medical-base.herokuapp.com/api/v1/patients/';
     }
     BaseService.prototype.handleError = function (error) {
         console.log(error);
