@@ -3,7 +3,7 @@
  */
 export class BaseService {
 
-  protected apiUrl = 'http://localhost:8080/api/v1/patients/';
+  protected apiUrl = 'https://medical-base.herokuapp.com/api/v1/patients/';
 
   handleError(error: Error): any {
     console.log(error);
