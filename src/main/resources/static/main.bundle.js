@@ -87,7 +87,6 @@ var AlertComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__patients_components_patient_create_patient_create_component__ = __webpack_require__("./src/app/patients/components/patient-create/patient-create.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__patients_components_patient_details_patient_details_component__ = __webpack_require__("./src/app/patients/components/patient-details/patient-details.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__patients_components_patient_list_patient_list_component__ = __webpack_require__("./src/app/patients/components/patient-list/patient-list.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -98,11 +97,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
 var routes = [
-    { path: '', redirectTo: '/patients', pathMatch: 'full' },
+    { path: '', redirectTo: '/', pathMatch: 'full' },
     { path: 'patient/create', component: __WEBPACK_IMPORTED_MODULE_2__patients_components_patient_create_patient_create_component__["a" /* PatientCreateComponent */] },
-    { path: 'patients/', component: __WEBPACK_IMPORTED_MODULE_4__patients_components_patient_list_patient_list_component__["a" /* PatientListComponent */] },
     { path: 'patient/:patientId', component: __WEBPACK_IMPORTED_MODULE_3__patients_components_patient_details_patient_details_component__["a" /* PatientDetailsComponent */] },
     { path: 'patient/edit/:patientId', component: __WEBPACK_IMPORTED_MODULE_2__patients_components_patient_create_patient_create_component__["a" /* PatientCreateComponent */] },
 ];
@@ -1377,7 +1374,7 @@ var PatientCreateComponent = /** @class */ (function (_super) {
         this.router.navigate(["/patient/" + patientId]);
     };
     PatientCreateComponent.prototype.formatDate = function (date) {
-        return new __WEBPACK_IMPORTED_MODULE_4__angular_common__["d" /* DatePipe */](navigator.language)
+        return new __WEBPACK_IMPORTED_MODULE_4__angular_common__["d" /* DatePipe */]("en-US")
             .transform(date, 'y-MM-dd');
     };
     PatientCreateComponent = __decorate([

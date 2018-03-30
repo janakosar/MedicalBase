@@ -1,11 +1,10 @@
 /**
  * Created by yana on 24.03.18.
  */
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component} from "@angular/core";
 import {PatientService} from "../../services/patient.service";
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormGroup, Validators, FormControl} from "@angular/forms";
-import {Subscription}   from 'rxjs/Subscription';
 import {DatePipe} from "@angular/common";
 import {Patient} from "../../models/Patient";
 import {PatientCreateInteractionService} from "../../../component-interaction-service/patient-create-interaction-service";
