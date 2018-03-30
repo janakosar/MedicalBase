@@ -128,7 +128,7 @@ export class PatientCreateComponent extends LifecycleComponent{
   }
 
   private formatDate(date: Date): string {
-    return new DatePipe(navigator.language)
+    return new DatePipe("en-US")
       .transform(date, 'y-MM-dd');
   }
 
