@@ -287,7 +287,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/alert/alert.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let alert of alerts\" class=\"alert alert-info alert-dismissible\" role=\"alert\" data-auto-dismiss=\"1000\">\n  {{alert}}\n  <a class=\"close\" (click)=\"removeAlert(alert)\">&times;</a>\n</div>\n"
+module.exports = "<div *ngFor=\"let alert of alerts\" class=\"alert alert-info alert-dismissible\"\n     role=\"alert\" data-auto-dismiss=\"1000\">{{alert}}\n\n  <a class=\"close\" (click)=\"removeAlert(alert)\">&times;</a>\n</div>\n"
 
 /***/ }),
 
@@ -334,7 +334,7 @@ var AlertComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             moduleId: module.i,
             selector: 'alert',
-            template: __webpack_require__("./src/app/alert/alert.component.html")
+            template: __webpack_require__("./src/app/alert/alert.component.html"),
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_alert_service__["a" /* AlertService */]])
     ], AlertComponent);
@@ -631,7 +631,7 @@ var CommentListItemComponent = /** @class */ (function () {
 /***/ "./src/app/comments/components/comments-block/comments-block.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".container{\n  background-color: #d5d5d5;\n  border: 2px solid;\n  padding: 15px;\n  height: 100%;\n  position: relative;\n}\n\n.title{\n  padding: 0 15px 0 15px;\n  height: 10%;\n}\n\n.comments-list{\n  margin-bottom: 15px;\n  overflow-y: auto;\n  height: 75%;\n}\n\n.input-block{\n  height: 15%;\n  padding-left: 10px;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n\nstrong{\n  font-size: x-large;\n}\n"
+module.exports = ".container{\n  background-color: #d5d5d5;\n  border: 2px solid;\n  padding: 15px;\n  height: 100%;\n  position: relative;\n}\n\n.title{\n  padding: 0 15px 0 15px;\n  height: 10%;\n}\n\n.comments-list{\n  margin-bottom: 15px;\n  overflow-y: auto;\n  height: 80%;\n}\n\n.input-block{\n  height: 10%;\n  padding-left: 10px;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n\nstrong{\n  font-size: x-large;\n}\n"
 
 /***/ }),
 
@@ -1741,14 +1741,14 @@ var PatientDetailsHeader = /** @class */ (function () {
 /***/ "./src/app/patients/components/patient-details/patient-details.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".main-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  padding: 15px 30px 15px 30px;\n  height: 85%;\n}\n\n.header{\n  padding: 0 0 0 0;\n  height: 15%;\n}\n\n.patient-details{\n  -webkit-box-flex: 30%;\n      -ms-flex: 30%;\n          flex: 30%;\n  height: 100%;\n}\n\n.comments-block{\n  -webkit-box-flex: 70%;\n      -ms-flex: 70%;\n          flex: 70%;\n  height: 100%;\n}\n\n.patient-info{\n  padding-top: 5px;\n  padding-bottom: 5px;\n}\n\nalert{\n  position: absolute;\n  top: 0;\n  right: 0;\n}\n"
+module.exports = ".main-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  padding: 15px 30px 15px 30px;\n  height: 85%;\n}\n\n.header{\n  padding: 0 0 0 0;\n  height: 15%;\n}\n\n.patient-details{\n  -webkit-box-flex: 30%;\n      -ms-flex: 30%;\n          flex: 30%;\n  height: 100%;\n}\n\n.comments-block{\n  -webkit-box-flex: 70%;\n      -ms-flex: 70%;\n          flex: 70%;\n  height: 100%;\n}\n\n.patient-info{\n  padding-top: 5px;\n  padding-bottom: 5px;\n}\n\nalert{\n  position: absolute;\n  top: 12%;\n  right: 5%;\n}\n"
 
 /***/ }),
 
 /***/ "./src/app/patients/components/patient-details/patient-details.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n  <div class=\"header\">\n  <app-patient-details-header [patient]=\"patient\"></app-patient-details-header>\n  </div>\n\n  <div class=\"row main-content\">\n\n    <div class=\"patient-details\">\n\n      <div class=\"row patient-info\">\n        <strong class=\"col\">Date of birth: </strong>\n        <div class=\"col\">{{patient.birthDate | date}}</div>\n      </div>\n\n      <div class=\"row patient-info\">\n        <strong class=\"col\">Sex: </strong>\n        <div class=\"col\" *ngIf=\"patient.sex=='MALE'; else female\">Male</div>\n\n        <ng-template #female>\n          <div class=\"col\">Female</div>\n        </ng-template>\n      </div>\n\n      <div class=\"row patient-info\">\n        <strong class=\"col\">Country:</strong>\n        <div class=\"col\">{{patient.country}}</div>\n      </div>\n\n      <div class=\"row patient-info\">\n        <strong class=\"col\">State:</strong>\n        <div class=\"col\">{{patient.state}}</div>\n      </div>\n\n      <div class=\"row patient-info\">\n        <strong class=\"col\">Address:</strong>\n        <div class=\"col\">{{patient.address}}</div>\n      </div>\n\n    </div>\n\n    <div class=\"comments-block\">\n      <app-comments-block></app-comments-block>\n\n      <alert></alert>\n\n    </div>\n\n  </div>\n\n\n</div>\n"
+module.exports = "<div class=\"container\">\n\n  <div class=\"header\">\n  <app-patient-details-header [patient]=\"patient\"></app-patient-details-header>\n  </div>\n\n  <div class=\"row main-content\">\n\n    <div class=\"patient-details\">\n\n      <div class=\"row patient-info\">\n        <strong class=\"col\">Date of birth: </strong>\n        <div class=\"col\">{{patient.birthDate | date}}</div>\n      </div>\n\n      <div class=\"row patient-info\">\n        <strong class=\"col\">Sex: </strong>\n        <div class=\"col\" *ngIf=\"patient.sex=='MALE'; else female\">Male</div>\n\n        <ng-template #female>\n          <div class=\"col\">Female</div>\n        </ng-template>\n      </div>\n\n      <div class=\"row patient-info\">\n        <strong class=\"col\">Country:</strong>\n        <div class=\"col\">{{patient.country}}</div>\n      </div>\n\n      <div class=\"row patient-info\">\n        <strong class=\"col\">State:</strong>\n        <div class=\"col\">{{patient.state}}</div>\n      </div>\n\n      <div class=\"row patient-info\">\n        <strong class=\"col\">Address:</strong>\n        <div class=\"col\">{{patient.address}}</div>\n      </div>\n\n    </div>\n\n\n\n    <div class=\"comments-block\">\n      <app-comments-block></app-comments-block>\n\n    </div>\n\n  </div>\n\n\n  <alert class=\"sticky-top\"></alert>\n\n\n</div>\n"
 
 /***/ }),
 
