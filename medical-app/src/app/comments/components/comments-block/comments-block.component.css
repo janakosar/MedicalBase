@@ -14,11 +14,11 @@
 .comments-list{
   margin-bottom: 15px;
   overflow-y: auto;
-  height: 75%;
+  height: 80%;
 }
 
 .input-block{
-  height: 15%;
+  height: 10%;
   padding-left: 10px;
   position: absolute;
   bottom: 0;
