@@ -9,6 +9,7 @@ import {DatePipe} from "@angular/common";
 import {Patient} from "../../models/Patient";
 import {PatientCreateInteractionService} from "../../../component-interaction-service/patient-create-interaction-service";
 import {LifecycleComponent} from "../../../lifecycle.component";
+import * as moment from "moment"
 
 @Component({
   selector: 'app-patient-create',
@@ -127,8 +128,16 @@ export class PatientCreateComponent extends LifecycleComponent{
   }
 
   private formatDate(date: Date): string {
-    return new DatePipe("en-US")
-      .transform(date, 'y-MM-dd');
+
+    let dateString = "";
+
+    try {
+      dateString = moment(date).format("YYYY-MM-D");
+    }catch (e){
+      console.log("DateFormatError: " + e);
+    }
+    console.log("Date formatted: " + dateString);
+    return dateString;
   }
 
 
